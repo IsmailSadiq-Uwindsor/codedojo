@@ -4,35 +4,21 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import Rating from '../components/Rating';
-// import Course from '../components/Course'
 
 const LearningPathScreen = () => {
-    // const [courses, setCourses] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchCourses = async () => {
-    //     const { data } = await axios.get('/api/courses');
-    //     setCourses(data)
-    //     };
-
-    //     fetchCourses();
-
-    // }, []);
-
-
-    // const [learningPath, setLearningPath] = useState([]);
+    const [learningPath, setLearningPath] = useState([]);
 
     const { id: learningPathId } = useParams ();
 
-    // useEffect(() => {
-    //     const fetchLearningPath = async () => {
-    //     const { data } = await axios.get(`/api/learning-paths/${learningPathId}`);
-    //     setLearningPath(data)
-    //     };
+    useEffect(() => {
+        const fetchLearningPath = async () => {
+        const { data } = await axios.get(`/api/learning-paths/${learningPathId}`);
+        setLearningPath(data)
+        };
 
-    //     fetchLearningPath();
+        fetchLearningPath();
 
-    // }, [learningPathId]);
+    }, [learningPathId]);
 
   return (
     <>
@@ -57,14 +43,6 @@ const LearningPathScreen = () => {
                      <ListGroup.Item></ListGroup.Item>        
                 </ListGroup>
 
-                {/* <h4>Courses: </h4>
-                <Row>
-                {courses.map( (course) => (
-                <Col key={course._id}>
-                    <Course course={course}/>
-                </Col>
-                ))}
-                </Row> */}
             </Col>
 
             <Col md={4}>
