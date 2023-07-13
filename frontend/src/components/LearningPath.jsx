@@ -5,11 +5,11 @@ import Rating from './Rating';
 const LearningPath = ({learningPath}) => {
   return (
     <Card className='my-3 p-3 rounded'>
-        <Link to={`/learningPath/${learningPath._id}`}/>
+        <Link to={`/learningPath/${learningPath._learningPathId}`}/>
             {/* <Card.Img src={learningPath.image} variant="top"/> */}
         {/* </a> */}
         <Card.Body>
-            <Link to={`/learningPath/${learningPath._id}`}>
+            <Link to={`/learningPath/${learningPath._learningPathId}`}>
                 <Card.Title as='div' className='product-title'>
                     <strong>{learningPath.name}</strong>
                 </Card.Title>

@@ -18,8 +18,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/' element={<HomeScreen/>}/>
-      <Route path='/learningPath/:id' element={<LearningPathScreen/>}/>
-      <Route path='/course/:id' element={<CourseScreen/>}/>
+      <Route path='/learningPath/:learningPathId' element={<LearningPathScreen/>}/>
+      <Route path='/learningPath/:learningPathId/course/:courseId' element={<CourseScreen/>}/>
     </Route>
   )
 )

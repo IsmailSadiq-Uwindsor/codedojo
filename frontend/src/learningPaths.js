@@ -1,6 +1,6 @@
 const learningPaths = [
     {
-        _id: '1',
+        _learningPathId: '1',
         name: 'FrontEnd JavaSript Path',
         learningPathId: 'learningPathFEJavaScript',
         description: 'JavaScript Frontend courses',
@@ -10,13 +10,14 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'fejscourse1',
 	        'fejscourse2'
         ]
     },
     {
-        _id: '2',
+        _learningPathId: '2',
         name: 'BackEnd JavaSript Path',
         learningPathId: 'learningPathBEJavaScript',
         description: 'JavaScript Backend courses',
@@ -26,13 +27,14 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'bejscourse1',
 	        'bejscourse2'
         ]
     },
     {
-        _id: '3',
+        _learningPathId: '3',
         name: 'Mobile JavaSript Path',
         learningPathId: 'learningPathMJavaScript',
         description: 'JavaScript Mobile courses',
@@ -42,13 +44,14 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'mjscourse1',
 	        'mjscourse2'
         ]
     },
     {
-        _id: '4',
+        _learningPathId: '4',
         name: 'FrontEnd Java Path',
         learningPathId: 'learningPathFEJava',
         description: 'Java Frontend courses',
@@ -58,13 +61,14 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'fejavacourse1',
 	        'fejavacourse2'
         ]
     },
     {
-        _id: '5',
+        _learningPathId: '5',
         name: 'BackEnd Java Path',
         learningPathId: 'learningPathBEJava',
         description: 'Java Backend courses',
@@ -74,13 +78,14 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'bejavacourse1',
 	        'bejavacourse2'
         ]
     },
     {
-        _id: '6',
+        _learningPathId: '6',
         name: 'Mobile Java Path',
         learningPathId: 'learningPathMJava',
         description: 'Java Mobile courses',
@@ -90,7 +95,8 @@ const learningPaths = [
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        path: [
+        isActive: true,
+        courses: [
             'mjavacourse1',
 	        'mjavacourse2'
         ]

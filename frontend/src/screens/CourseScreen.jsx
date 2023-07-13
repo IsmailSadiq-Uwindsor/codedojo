@@ -8,16 +8,16 @@ import courses from '../courses'
 
 const CourseScreen = () => {
 
-    const { id: courseId } = useParams ();
+    const { courseId: courseId } = useParams ();
 
-    const course = courses.find((c) => c._id === courseId);
+    const course = courses.find((c) => c._courseId === courseId);
 
   return (
     <>
         {/* <Link className='btn btn-light my-3' to={`/learningPath/${learningPath._id}`} >Go Back</Link> */}
          {/* <Link className='btn btn-light my-3' to="/learningPath/2" >Go Back</Link> */}
+        {/* <Link className='btn btn-light my-3' to={`/learningPath/${learningPath._learningPathId}`}>Go Back</Link> */}
         <Row>
-            
             <Col>
                 <ListGroup variant='flush'>
                     <ListGroup.Item></ListGroup.Item>

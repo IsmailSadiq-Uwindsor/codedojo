@@ -7,17 +7,18 @@ import Rating from '../components/Rating';
 import learningPaths from '../learningPaths'
 import Course from '../components/Course'
 import courses from '../courses'
+import CourseScreen from './CourseScreen';
 
 const LearningPathScreen = () => {
 
-    const { id: learningPathId } = useParams ();
+    const { learningPathId: learningPathId } = useParams ();
 
-    const learningPath = learningPaths.find((lP) => lP._id === learningPathId);
+    const learningPath = learningPaths.find((lP) => lP._learningPathId === learningPathId);
 
   return (
     <>
             <Link className='btn btn-light my-3' to="/">Go Back</Link>
-            <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.countInStock === 0} >
+            <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false} >
                                     Add To Cart
             </Button>
         <Row>
@@ -42,10 +43,11 @@ const LearningPathScreen = () => {
 
                 <h4>Courses: </h4>
                 <Row>
-                    {courses.map( (course) => (
+                    {courses.filter(obj => obj._learningPathId == learningPathId).map( (course) => (
                         //<Col key={course._id} sm={12} md={6} lg={4} xl={3}>
-                        <Col key={course._id}>
-                            <Course course={course}/>
+                        <Col key={course._learningPathId}>
+                            <Course learningPathId={learningPathId} course={course}/>
+                            {/* <CourseScreen learningPathId={learningPathId}/> */}
                         </Col>
                     ))}
                 </Row>
