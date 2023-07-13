@@ -13,11 +13,11 @@ const LearningPathScreen = () => {
 
     const { learningPathId: learningPathId } = useParams ();
 
-    const learningPath = learningPaths.find((lP) => lP._learningPathId === learningPathId);
+    const learningPath = learningPaths.find((cL) => cL._learningPathId === learningPathId);
 
   return (
     <>
-            <Link className='btn btn-light my-3' to="/">Go Back</Link>
+            <Link className='btn btn-light my-3' to="/learningPaths">Go Back</Link>
             <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false} >
                                     Add To Cart
             </Button>
@@ -43,11 +43,10 @@ const LearningPathScreen = () => {
 
                 <h4>Courses: </h4>
                 <Row>
-                    {courses.filter(obj => obj._learningPathId == learningPathId).map( (course) => (
+                    {courses.filter(obj => obj._learningPathId == learningPathId).map( (course, index) => (
                         //<Col key={course._id} sm={12} md={6} lg={4} xl={3}>
-                        <Col key={course._learningPathId}>
+                        <Col key={index}>
                             <Course learningPathId={learningPathId} course={course}/>
-                            {/* <CourseScreen learningPathId={learningPathId}/> */}
                         </Col>
                     ))}
                 </Row>

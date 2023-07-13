@@ -1,9 +1,18 @@
 import { Container } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useEffect } from 'react';
 
 const App = () => {
+
+  const currentPath =  useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(currentPath.pathname === "/"){
+      navigate("/learningPaths")
+    }
+  }, [] )
   return (
     <>
     <Header/>

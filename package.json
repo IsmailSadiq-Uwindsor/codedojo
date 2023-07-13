@@ -1,0 +1,15 @@
+{
+  "name": "codedojo",
+  "version": "1.0.0",
+  "description": "codedojo online learning app built with the MERN stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Group 6",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

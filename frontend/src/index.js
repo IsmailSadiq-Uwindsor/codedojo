@@ -17,9 +17,9 @@ import CourseScreen from './screens/CourseScreen';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
-      <Route index={true} path='/' element={<HomeScreen/>}/>
-      <Route path='/learningPath/:learningPathId' element={<LearningPathScreen/>}/>
-      <Route path='/learningPath/:learningPathId/course/:courseId' element={<CourseScreen/>}/>
+      <Route index={true} path='/learningPaths' element={<HomeScreen/>}/>
+      <Route path='/learningPaths/:learningPathId/courses' element={<LearningPathScreen/>}/>
+      <Route path='/learningPaths/:learningPathId/courses/:courseId/quizzes' element={<CourseScreen/>}/>
     </Route>
   )
 )
