@@ -1,9 +1,23 @@
-// import {useEffect, useState} from 'react'
-import {Row, Col} from 'react-bootstrap'
-import LearningPath from '../components/LearningPath'
-import learningPaths from '../learningPaths'
+import {useEffect, useState} from 'react';
+import {Row, Col} from 'react-bootstrap';
+import LearningPath from '../components/LearningPath';
+import axios from 'axios';
+// import learningPaths from '../learningPaths'
 
 const HomeScreen = () => {
+
+  const [learningPaths, setLearningPaths] = useState([])
+
+  useEffect(() => {
+    const fetchLearningPaths = async () => {
+      const learningPathsAllData = await axios.get('/api/learningPaths');
+      const learningPathsData = learningPathsAllData.data;
+      setLearningPaths(learningPathsData);
+    };
+    fetchLearningPaths();
+  }, []);
+
+  // console.log(learningPaths)
 
   return (
     <>

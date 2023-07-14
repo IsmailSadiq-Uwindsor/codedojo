@@ -12,7 +12,6 @@ const courses = [
         credits: 0,
         sortOrder: 1,
         category: 'HTML'
-       
     },
     {
         _courseId: '2',

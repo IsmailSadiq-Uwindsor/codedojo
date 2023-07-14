@@ -1,9 +1,11 @@
 import express  from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 import learningPaths from './data/learningPaths.js';
 import courses from './data/courses.js';
 import quizzes from './data/quizzes.js';
 
-const port = 8000;
+const port = process.env.PORT;
 
 const app = express();
 
@@ -22,7 +24,10 @@ app.get('/api/learningPaths/:learningPathId', (req, res) => {
 //example.com/api/learningPath/1/courses
 app.get('/api/learningPaths/:learningPathId/courses', function(req, res) {
      // param = {learningPathId:1}
-    const courseList = courses.find((cL) => cL._learningPathId ===req.params.learningPathId );
+    // const courseList = courses.find((cL) => cL._learningPathId ===req.params.learningPathId );
+    const params = req.params; // param = {learningPathId:1}
+    const learningPathId = params.learningPathId;
+    const courseList = courses.filter(course => course._learningPathId === learningPathId)
     res.json(courseList)
   })
 
@@ -36,7 +41,11 @@ app.get('/api/learningPaths/:learningPathId/courses/:courseId', function(req, re
   //example.com/api/learningPath/1/courses/1/quizzes
 app.get('/api/learningPaths/:learningPathId/courses/:courseId/quizzes', function(req, res) {
     // param = {learningPathId:1, courseId:1}
-    const quizList = quizzes.find((qL) => qL._learningPathId === req.params.learningPathId && qL._courseId == req.params.courseId )
+    // const quizList = quizzes.find((qL) => qL._learningPathId === req.params.learningPathId && qL._courseId == req.params.courseId )
+    const params = req.params; // param = {learningPathId:1, courseId:1}
+    const learningPathId = params.learningPathId;
+    const courseId = params.courseId;
+    const quizList = quizzes.filter(course => course._learningPathId === learningPathId && course._courseId === courseId)
     res.json(quizList)
   })
 

@@ -1,19 +1,40 @@
-// import {useEffect, useState} from 'react'
-// import axios from 'axios';
+import {useEffect, useState} from 'react'
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import Rating from '../components/Rating';
-import learningPaths from '../learningPaths'
+// import learningPaths from '../learningPaths'
 import Course from '../components/Course'
-import courses from '../courses'
-import CourseScreen from './CourseScreen';
+// import courses from '../courses'
 
 const LearningPathScreen = () => {
 
-    const { learningPathId: learningPathId } = useParams ();
+    const { learningPathId: learningPathId, courseId: courseId} = useParams ();
+    const [learningPath, setLearningPath] = useState({});
+    useEffect(() => {
+        const fetchLearningPath = async () => {
+          const learningPathAllData = await axios.get(`/api/learningPaths/${learningPathId}`);
+          const learningPathData = learningPathAllData.data;
+          setLearningPath(learningPathData);
+        };
+        fetchLearningPath();
+      }, [learningPathId]);
 
-    const learningPath = learningPaths.find((cL) => cL._learningPathId === learningPathId);
+
+    //   const { courseId: courseId } = useParams ();
+      const [courses, setCourses] = useState([])
+      useEffect(() => {
+        const fetchCourses = async () => {
+          const coursesAllData  = await axios.get(`/api/learningPaths/${learningPathId}/courses`);
+          const coursesData = coursesAllData.data;
+          setCourses(coursesData);
+        };
+        fetchCourses();
+      }, [learningPathId, courseId]);
+
+    // const { learningPathId: learningPathId } = useParams ();
+    // const learningPath = learningPaths.find((cL) => cL._learningPathId === learningPathId); 
 
   return (
     <>
@@ -43,8 +64,8 @@ const LearningPathScreen = () => {
 
                 <h4>Courses: </h4>
                 <Row>
-                    {courses.filter(obj => obj._learningPathId == learningPathId).map( (course, index) => (
-                        //<Col key={course._id} sm={12} md={6} lg={4} xl={3}>
+                    {/* {courses.filter(obj => obj._learningPathId == learningPathId).map( (course, index) => ( */}
+                    {courses.map( (course, index) => (
                         <Col key={index}>
                             <Course learningPathId={learningPathId} course={course}/>
                         </Col>
