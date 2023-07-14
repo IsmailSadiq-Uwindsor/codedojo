@@ -1,11 +1,14 @@
 import express  from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import connectDB from './config/db.js';
 import learningPaths from './data/learningPaths.js';
 import courses from './data/courses.js';
 import quizzes from './data/quizzes.js';
 
 const port = process.env.PORT;
+
+connectDB(); //Connect to MongoDB
 
 const app = express();
 

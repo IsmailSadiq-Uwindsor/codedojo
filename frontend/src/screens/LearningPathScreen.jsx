@@ -10,7 +10,8 @@ import Course from '../components/Course'
 
 const LearningPathScreen = () => {
 
-    const { learningPathId: learningPathId, courseId: courseId} = useParams ();
+    // const { learningPathId: learningPathId, courseId: courseId} = useParams ();
+    const { learningPathId: learningPathId} = useParams ();
     const [learningPath, setLearningPath] = useState({});
     useEffect(() => {
         const fetchLearningPath = async () => {
@@ -31,7 +32,8 @@ const LearningPathScreen = () => {
           setCourses(coursesData);
         };
         fetchCourses();
-      }, [learningPathId, courseId]);
+    }, [learningPathId]);
+    //   }, [learningPathId, courseId]);
 
     // const { learningPathId: learningPathId } = useParams ();
     // const learningPath = learningPaths.find((cL) => cL._learningPathId === learningPathId); 
