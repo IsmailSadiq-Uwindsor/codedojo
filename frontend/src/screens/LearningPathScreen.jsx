@@ -22,6 +22,9 @@ const LearningPathScreen = () => {
         fetchLearningPath();
       }, [learningPathId]);
 
+      console.log(learningPath)
+      console.log(learningPath.name)
+
 
     //   const { courseId: courseId } = useParams ();
       const [courses, setCourses] = useState([])

@@ -21,6 +21,9 @@ const CourseScreen = () => {
         fetchCourse();
       }, [learningPathId, courseId]);
 
+      console.log(course)
+      console.log(course.title)
+
       const [quizzes, setQuizzes] = useState([])
       useEffect(() => {
         const fetchQuizzes = async () => {
