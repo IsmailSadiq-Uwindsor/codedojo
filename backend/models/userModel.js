@@ -18,17 +18,17 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
-    },
-    purchases: [
-        {
-            name: { type: String, required: true },
-            learningPath: { 
-                type:  mongoose.Schema.Types.ObjectId, 
-                required: true, 
-                ref: "LearningPath" 
-            }
-        },
-    ]
+    }
+    // purchases: [
+    //     {
+    //         name: { type: String, required: true },
+    //         learningPathId: { 
+    //             type:  mongoose.Schema.Types.ObjectId, 
+    //             required: true, 
+    //             ref: "LearningPath" 
+    //         }
+    //     }
+    // ]
 }, {
     timestamps: true
 });

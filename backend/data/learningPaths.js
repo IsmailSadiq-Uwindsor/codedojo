@@ -1,105 +1,75 @@
 const learningPaths = [
     {
-        _learningPathId: '1',
         name: 'FrontEnd JavaSript Path',
-        learningPathId: 'learningPathFEJavaScript',
+        image: 'learningPathFEJavaScript',
         description: 'JavaScript Frontend courses',
         language: 'JavaScript',
         category: 'FE',
-        slug: 'fe-js-path',
+        learningPathSlug: 'fe-js-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'fejscourse1',
-	        'fejscourse2'
-        ]
+        isActive: true
     },
     {
-        _learningPathId: '2',
         name: 'BackEnd JavaSript Path',
-        learningPathId: 'learningPathBEJavaScript',
+        image: 'learningPathBEJavaScript',
         description: 'JavaScript Backend courses',
         language: 'JavaScript',
         category: 'BE',
-        slug: 'be-js-path',
+        learningPathSlug: 'be-js-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'bejscourse1',
-	        'bejscourse2'
-        ]
+        isActive: true
     },
     {
-        _learningPathId: '3',
         name: 'Mobile JavaSript Path',
-        learningPathId: 'learningPathMJavaScript',
+        image: 'learningPathMJavaScript',
         description: 'JavaScript Mobile courses',
         language: 'JavaScript',
         category: 'M',
-        slug: 'm-js-path',
+        learningPathSlug: 'm-js-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'mjscourse1',
-	        'mjscourse2'
-        ]
+        isActive: true
     },
     {
-        _learningPathId: '4',
         name: 'FrontEnd Java Path',
-        learningPathId: 'learningPathFEJava',
+        image: 'learningPathFEJava',
         description: 'Java Frontend courses',
         language: 'Java',
         category: 'FE',
-        slug: 'fe-java-path',
+        learningPathSlug: 'fe-java-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'fejavacourse1',
-	        'fejavacourse2'
-        ]
+        isActive: true
     },
     {
-        _learningPathId: '5',
         name: 'BackEnd Java Path',
-        learningPathId: 'learningPathBEJava',
+        image: 'learningPathBEJava',
         description: 'Java Backend courses',
         language: 'Java',
         category: 'BE',
-        slug: 'be-java-path',
+        learningPathSlug: 'be-java-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'bejavacourse1',
-	        'bejavacourse2'
-        ]
+        isActive: true
     },
     {
-        _learningPathId: '6',
         name: 'Mobile Java Path',
-        learningPathId: 'learningPathMJava',
+        image: 'learningPathMJava',
         description: 'Java Mobile courses',
         language: 'Java',
         category: 'M',
-        slug: 'm-java-path',
+        learningPathSlug: 'm-java-path',
         price: 10.99,
         rating: 4.1,
         numReviews: 12,
-        isActive: true,
-        courses: [
-            'mjavacourse1',
-	        'mjavacourse2'
-        ]
+        isActive: true
     }
 ]
 

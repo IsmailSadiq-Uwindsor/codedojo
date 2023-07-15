@@ -25,11 +25,11 @@ const Course = ({ quiz, test }) => {
                         <div style = {{marginLeft: 20}}> <input onChange={onselect} type='radio' value={false} name='options'/>  {quiz.options[2]} </div>
                         <div style = {{marginLeft: 20}}> <input onChange={onselect} type='radio' value={false} name='options'/>  {quiz.options[3]} </div> */}
                     <Card.Title>{quiz.question}</Card.Title>
-                    <ul key={quiz._quizId}>
+                    <ul key={quiz._id}>
                         {
                             quiz.options.map((q, i) => (
                                 <div key={i}>
-                                    <input type='radio' value={false} id = {`q${i}-option`} name={`quiz-${quiz._quizId}-answer`} onChange={onselect()} />
+                                    <input type='radio' value={false} id = {`q${i}-option`} name={`quiz-${quiz._id}-answer`} onChange={onselect()} />
                                     <label htmlFor={`q${i}-option`}> &nbsp; {q} </label>
                                 </div>
                             )

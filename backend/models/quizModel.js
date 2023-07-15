@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
 const quizSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     },
-    learningPath: {
+    learningPathId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "LearningPath"
     },
-    course: {
+    courseId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Course"

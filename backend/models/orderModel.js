@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
@@ -10,12 +10,12 @@ const orderSchema = new mongoose.Schema({
         {
             name: { type: String, required: true },
             price: { type: Number, required: true },
-            learningPath: { 
+            learningPathId: { 
                 type:  mongoose.Schema.Types.ObjectId, 
                 required: true, 
                 ref: "LearningPath" 
             }
-        },
+        }
     ],
     paymentMethod: {
         type: String,
@@ -54,6 +54,6 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Order = mongoose.model("User", orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 export default Order;
