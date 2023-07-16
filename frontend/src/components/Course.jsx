@@ -9,8 +9,8 @@ const Course = ({ learningPathId, course}) => {
             {/* <Card.Img src={learningPath.image} variant="top"/> */}
         {/* </a> */}
         <Card.Body>
-            <Link to={`/login?redirect=/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}>
-            {/* <Link to={`/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}> */}
+            {/* <Link to={`/login?redirect=/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}> */}
+            <Link to={`/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}>
                 <Card.Title as='div' className='product-title'>
                     <strong>{course.title}</strong>
                 </Card.Title>
