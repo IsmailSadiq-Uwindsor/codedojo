@@ -1,6 +1,8 @@
 import {Row, Col} from 'react-bootstrap';
+import { useGetLearningPathsQuery } from '../slices/productsApiSlice';
 import LearningPath from '../components/LearningPath';
-import { useGetLearningPathsQuery } from '../slices/learningPathsApiSlice';
+import Loader from "../components/Loader";
+import Message from '../components/Message'; 
 
 const HomeScreen = () => {
 
@@ -15,8 +17,8 @@ const HomeScreen = () => {
   return (
     <>
         { isLoading ? (
-          <h2>Loading...</h2>
-        ) : error ? (<div>{ error?.data?.message || error.error }</div>) : (<>
+          <Loader/>
+        ) : error ? (<Message variant='danger'>{ error?.data?.message || error.error }</Message>) : (<>
           <h1>Learning Paths</h1>
           <Row>
               {learningPaths.map( (learningPath) => (

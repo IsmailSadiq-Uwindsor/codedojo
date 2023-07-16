@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-import Rating from '../components/Rating';
-import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/learningPathsApiSlice';
+import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/productsApiSlice';
 import Course from '../components/Course'
+import Rating from '../components/Rating';
+import Loader from "../components/Loader";
+import Message from '../components/Message'; 
 
 const LearningPathScreen = () => {
 
@@ -30,8 +31,8 @@ const LearningPathScreen = () => {
         <Link className='btn btn-light my-3' to="/learningPaths">Go Back</Link>
 
         {learningPathIsLoading ? (
-          <h2>Loading LearningPath Details...</h2>
-        ) : learningPathError ? (<div>{learningPathError?.data?.message || learningPathError.error}</div>) : ( <>
+          <Loader/>
+        ) : learningPathError ? (<Message variant='danger'>{learningPathError?.data?.message || learningPathError.error}</Message>) : ( <>
           <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false} >
                                       Add To Cart
           </Button>
@@ -51,8 +52,8 @@ const LearningPathScreen = () => {
                 </ListGroup>
 
                 {coursesIsLoading ? (
-                <h3>Loading Courses...</h3>
-                ) : coursesError ? (<div>{coursesError?.data?.message || coursesError.error}</div>) : ( <>
+                <h4>Loading Courses...</h4>
+                ) : coursesError ? (<Message variant='danger'>{coursesError?.data?.message || coursesError.error}</Message>) : ( <>
                   <h4>Courses: </h4>
                   <Row>
                       {courses.map( (course, index) => (

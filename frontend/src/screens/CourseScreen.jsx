@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-import { useGetCourseDetailsQuery, useGetQuizzesForCourseQuery } from '../slices/learningPathsApiSlice';
+import { useGetCourseDetailsQuery, useGetQuizzesForCourseQuery } from '../slices/productsApiSlice';
 import Quiz from '../components/Quiz'
+import Loader from "../components/Loader";
+import Message from '../components/Message'; 
 
 const CourseScreen = () => {
 
@@ -33,8 +34,8 @@ const CourseScreen = () => {
         <Link className='btn btn-light my-3' to={`/learningPaths/${learningPathId}/courses`}>Go Back</Link>
 
         {courseIsLoading ? (
-          <h2>Loading Course Details...</h2>
-        ) : courseError ? (<div>{courseError?.data?.message || courseError.error}</div>) : ( <>
+           <Loader/>
+        ) : courseError ? (<Message variant='danger'>{courseError?.data?.message || courseError.error}</Message>) : ( <>
           <Row>
               <Col>
                   <ListGroup variant='flush'>
@@ -52,8 +53,8 @@ const CourseScreen = () => {
                   </ListGroup>
 
                   {quizzesIsLoading ? (
-                  <h3>Loading Quizzes...</h3>
-                  ) : quizzesError ? (<div>{quizzesError?.data?.message || quizzesError.error}</div>) : ( <>
+                  <h4>Loading Quizzes...</h4>
+                  ) : quizzesError ? (<Message variant='danger'>{quizzesError?.data?.message || quizzesError.error}</Message>) : ( <>
                     <h4>Quizzes: </h4>
                     <Row>
                         {quizzes.map( (quiz, index) => (

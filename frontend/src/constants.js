@@ -2,7 +2,7 @@
 
 export const BASE_URL = '';
 
-export const LEARNINGPATHS_URL = '/api/learningPaths';
+export const PRODUCTS_URL = '/api/learningPaths';
 
 export const USERS_URL = '/api/users';
 

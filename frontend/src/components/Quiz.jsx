@@ -6,7 +6,7 @@ const Course = ({ quiz, test }) => {
 
     const [checked, setChecked] = useState(undefined)
 
-    console.log(test)
+    // console.log(test)
 
     function onselect() {
     }
