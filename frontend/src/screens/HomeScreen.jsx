@@ -1,34 +1,31 @@
-import {useEffect, useState} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import LearningPath from '../components/LearningPath';
-import axios from 'axios';
-// import learningPaths from '../learningPaths'
+import { useGetLearningPathsQuery } from '../slices/learningPathsApiSlice';
 
 const HomeScreen = () => {
 
-  const [learningPaths, setLearningPaths] = useState([])
+  const learningPathsData = useGetLearningPathsQuery();
 
-  useEffect(() => {
-    const fetchLearningPaths = async () => {
-      const learningPathsAllData = await axios.get('/api/learningPaths');
-      const learningPathsData = learningPathsAllData.data;
-      setLearningPaths(learningPathsData);
-    };
-    fetchLearningPaths();
-  }, []);
+  const learningPaths = learningPathsData.data
 
-  // console.log(learningPaths)
+  const isLoading = learningPathsData.isLoading
+
+  const error = learningPathsData.isError
 
   return (
     <>
-        <h1>Learning Paths</h1>
-        <Row>
-            {learningPaths.map( (learningPath) => (
-                <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>
-                    <LearningPath learningPath={learningPath}/>
-                </Col>
-            ))}
-        </Row>
+        { isLoading ? (
+          <h2>Loading...</h2>
+        ) : error ? (<div>{ error?.data?.message || error.error }</div>) : (<>
+          <h1>Learning Paths</h1>
+          <Row>
+              {learningPaths.map( (learningPath) => (
+                  <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>
+                      <LearningPath learningPath={learningPath}/>
+                  </Col>
+              ))}
+          </Row>
+        </>) } 
     </>
   )
 }
