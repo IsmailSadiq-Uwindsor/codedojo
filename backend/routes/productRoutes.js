@@ -1,8 +1,11 @@
 import express from 'express';
-import { getLearningPaths, getLearningPathById } from '../controllers/productController.js';
-import { getCoursesForLearningPath, getCourseById } from '../controllers/courseController.js';
-import { getQuizzesForCourse } from '../controllers/quizController.js';
-
+import { 
+    getLearningPaths, 
+    getLearningPathById, 
+    getCoursesForLearningPath, 
+    getCourseById, 
+    getQuizzesForCourse 
+} from '../controllers/productController.js';
 const router = express.Router();
 
 router.route('/').get(getLearningPaths);

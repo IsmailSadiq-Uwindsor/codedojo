@@ -6,7 +6,7 @@ const LearningPath = ({learningPath}) => {
     
   return (
     <Card className='my-3 p-3 rounded'>
-        <Link to={`/learningPaths/${learningPath._id}/courses`}/>
+        {/* <Link to={`/learningPaths/${learningPath._id}/courses`}/> */}
             {/* <Card.Img src={learningPath.image} variant="top"/> */}
         {/* </a> */}
         <Card.Body>
