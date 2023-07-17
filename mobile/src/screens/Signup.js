@@ -19,6 +19,10 @@ const Signup =()=>{
       <Icon name="user" style={styles.icon} />
       <TextInput style={styles.input} placeholder="First Name" />
       </View>
+      <View style={styles.direction}>
+        <Icon name="user" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Last Name" secureTextEntry />
+        </View>
   );
 };
 
