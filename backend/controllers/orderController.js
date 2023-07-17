@@ -23,7 +23,7 @@ const addOrderItems = asyncHandler( async (req, res) => {
             learningPathId: x._id,
             _id: undefined
         })),
-        user: req.user._id,
+        userId: req.user._id,
         paymentMethod,
         itemsPrice,
         taxPrice,

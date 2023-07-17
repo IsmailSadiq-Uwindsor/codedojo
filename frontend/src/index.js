@@ -20,6 +20,7 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path='' element={<PrivateRoute/>}>
         <Route path='/learningPaths/:learningPathId/courses/:courseId/quizzes' element={<CourseScreen/>}/>
         <Route path='/payment' element={<PaymentScreen/>}/>
+        <Route path='/placeorder' element={<PlaceOrderScreen/>}/>
       </Route>
     </Route>
   )
