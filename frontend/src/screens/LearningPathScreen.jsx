@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/productsApiSlice';
 import Course from '../components/Course'
@@ -7,10 +7,13 @@ import Rating from '../components/Rating';
 import Loader from "../components/Loader";
 import Message from '../components/Message'; 
 import { addToCart } from '../slices/cartSlice';
+import { FaInfoCircle } from "react-icons/fa"
 
 const LearningPathScreen = () => {
 
     const { learningPathId: learningPathId} = useParams ();
+
+    const { userInfo } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -45,47 +48,65 @@ const LearningPathScreen = () => {
           }
       }
     }
+
+    let access = false;
+    if(userInfo !== null){
+    for (let i = 0; i < userInfo.purchases.length; i++){
+          if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
+            access = true;
+          }
+      }
+    }
   
   return (
     <>
         <Link className='btn btn-light my-3' to="/learningPaths">Go Back</Link>
 
-        
-
         {learningPathIsLoading ? (
           <Loader/>
         ) : learningPathError ? (<Message variant='danger'>{learningPathError?.data?.message || learningPathError.error}</Message>) : ( <>
-        
-          <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false || button === true} onClick={addToCartHandler}>
-                                      Add To Cart
-          </Button>
+          { access  
+          ? 
+            <Button style = {{display: 'none'}} className='btn-block' type='button' disabled={learningPath.isActive === false || button === true} onClick={addToCartHandler}> Add To Cart </Button>
+          :
+            
+            <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false || button === true} onClick={addToCartHandler}> Add To Cart </Button>
+          }
 
           <Row>
             <Col md={5}>
                 <ListGroup variant='flush'>
                     <ListGroup.Item></ListGroup.Item>
-                    <ListGroup.Item>
-                        <h3>{learningPath.name}</h3>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <Rating value={learningPath.rating} text={`${learningPath.numReviews} reviews`}/>
-                    </ListGroup.Item>
-                    <ListGroup.Item>Price: ${learningPath.price}</ListGroup.Item>
-                    <ListGroup.Item> Learning Description: {learningPath.description}</ListGroup.Item>    
-                    <ListGroup.Item></ListGroup.Item>        
+                      <ListGroup.Item>
+                          <h3><strong>{learningPath.name}</strong></h3>
+                      </ListGroup.Item>
+                      <ListGroup.Item><strong>LearningPath Description:</strong> {learningPath.description}</ListGroup.Item>  
+                      <ListGroup.Item><strong>Price:</strong> ${learningPath.price}</ListGroup.Item>
+                      <ListGroup.Item>
+                          <Rating value={learningPath.rating} text={`${learningPath.numReviews} reviews`}/>
+                      </ListGroup.Item>  
+                      <ListGroup.Item></ListGroup.Item>        
                 </ListGroup>
 
                 {coursesIsLoading ? (
                 <h4>Loading Courses...</h4>
                 ) : coursesError ? (<Message variant='danger'>{coursesError?.data?.message || coursesError.error}</Message>) : ( <>
-                  <h4>Courses: </h4>
-                  <Row>
-                      {courses.map( (course, index) => (
-                          <Col key={index}>
-                              <Course learningPathId={learningPathId} course={course}/>
-                          </Col>
-                      ))}
-                  </Row>
+                    { access  
+                    ? 
+                    <h4>Courses: </h4> 
+                    : 
+                    <>
+                      <h4>Courses: </h4> 
+                      <h6> <FaInfoCircle/> Purchase LearningPath to gain access to courses</h6>
+                    </>
+                    }
+                    <Row>
+                        {courses.map( (course, index) => (
+                            <Col key={index}>
+                                <Course learningPathId={learningPathId} course={course}/>
+                            </Col>
+                        ))}
+                    </Row>
                 </>)}
             </Col>
           </Row>

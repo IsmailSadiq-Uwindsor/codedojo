@@ -16,6 +16,8 @@ import HomeScreen from './screens/HomeScreen';
 import LearningPathScreen from './screens/LearningPathScreen';
 import CourseScreen from './screens/CourseScreen';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +26,8 @@ const router = createBrowserRouter(
       <Route path='/learningPaths/:learningPathId/courses' element={<LearningPathScreen/>}/>
       <Route path='/learningPaths/:learningPathId/courses/:courseId/quizzes' element={<CourseScreen/>}/>
       <Route path='/cart' element={<CartScreen/>}/>
+      <Route path='/login' element={<LoginScreen/>}/>
+      <Route path='/register' element={<RegisterScreen/>}/>
     </Route>
   )
 )
