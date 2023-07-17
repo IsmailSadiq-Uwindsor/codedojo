@@ -10,7 +10,15 @@ const Signup =()=>{
   };
 
   return(
-      <Text>Signup Screen</Text>
+    <View style={styles.container}>
+    <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+    <View style={styles.formContainer}>
+    <Text style={styles.text1}>Sign Up Here</Text>  
+    
+      <View style={styles.direction}>
+      <Icon name="user" style={styles.icon} />
+      <TextInput style={styles.input} placeholder="First Name" />
+      </View>
   );
 };
 
