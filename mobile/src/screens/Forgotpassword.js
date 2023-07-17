@@ -82,6 +82,14 @@ const styles = StyleSheet.create({
   direction:{
     flexDirection:'row',
   },
+  text1:{
+    marginBottom:20,
+    alignSelf:'center',
+    color:'#4714CA',
+    fontSize:20,
+    
+  },
+
 });
 
 export default Forgotpassword;
