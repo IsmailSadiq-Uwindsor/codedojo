@@ -9,24 +9,11 @@ import { useParams } from 'react-router-dom';
 
 const App = () => {
 
-  const { learningPathId: learningPathId, courseId: courseId } = useParams ();
-
-  let local = JSON.parse(localStorage.getItem("userInfo"));
-  let isLoggedIn = false;
-  if(local !== null){
-      isLoggedIn = true
-   }
-
   const currentPath =  useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     if(currentPath.pathname === "/"){
       navigate("/learningPaths")
-    }
-  }, [] )
-  useEffect(() => {
-    if(currentPath.pathname === `/learningPaths/${learningPathId}/courses/${courseId}/quizzes` && isLoggedIn === false){
-      navigate("/login")
     }
   }, [] )
 

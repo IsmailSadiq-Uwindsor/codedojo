@@ -33,7 +33,7 @@ const Course = ({ learningPathId, course}) => {
                 </Card.Body> 
             :
                 <Card.Body>
-                    {/* <Link to={`/login?redirect=/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}> */}
+                    {/* <Link disabled> */}
                         <Card.Title as='div' className='product-title'>
                             <strong>{course.title}</strong>
                         </Card.Title>
