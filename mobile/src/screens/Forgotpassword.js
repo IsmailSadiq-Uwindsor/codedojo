@@ -6,9 +6,26 @@ import { useNavigation } from '@react-navigation/native';
 const Forgotpassword =()=>{
   const navigation = useNavigation();
   const handlelink = () => {
+    // Perform login logic here
+  
+    // Redirect to HomeScreen
+   // navigation.navigate('Forgotlink');
   };
   return(
-      <Text>Forgot password Screen</Text>
+    <View style={styles.container}>
+    <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+    <View style={styles.formContainer}>
+    <Text style={styles.text1}>We will sent a link to reset your password at your mail address.
+      </Text>
+      <View style={styles.direction}>
+      <Icon name="envelope" style={styles.icon} />
+      <TextInput style={styles.input} placeholder="Enter your email address here" />
+      </View>
+      <Pressable style={styles.loginButton} onPress={handlelink}>
+        <Text style={styles.loginButtonText} >Forgot password</Text>
+      </Pressable>
+    </View>
+  </View>
   );
 };
 
