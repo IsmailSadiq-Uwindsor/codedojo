@@ -27,6 +27,14 @@ const Signup =()=>{
         <Icon name="envelope" style={styles.icon} />
         <TextInput style={styles.input} placeholder="email id" secureTextEntry />
         </View>
+        <View style={styles.direction}>
+        <Icon name="lock" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+        </View>
+        <View style={styles.direction}>
+        <Icon name="lock" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry />
+        </View>
       </View>
   );
 };
