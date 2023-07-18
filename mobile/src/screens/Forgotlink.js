@@ -6,6 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const Forgotlink =()=>{
+  const navigation = useNavigation();
+  const handlelogin = () => {
+    // Perform login logic here
+  
+    // Redirect to HomeScreen
+    //navigation.navigate('LoginScreen');
+  };
   return(
       <Text>Forgot Screen</Text>
   );
