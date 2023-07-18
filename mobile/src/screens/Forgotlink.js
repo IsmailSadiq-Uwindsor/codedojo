@@ -14,7 +14,16 @@ const Forgotlink =()=>{
     //navigation.navigate('LoginScreen');
   };
   return(
-      <Text>Forgot Screen</Text>
+    <View style={styles.container}>
+      <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+      <View style={styles.formContainer}>
+      <Text style={styles.text1}>Link has been sent successfully. Kindly check your mailbox.</Text>
+        
+        <Pressable style={styles.loginButton} onPress={handlelogin} >
+          <Text style={styles.loginButtonText} >Login</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 };
 
