@@ -64,6 +64,32 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom:10,
   },
+  loginButton: {
+    width:'80%',
+    height: 40,
+    backgroundColor: '#B79FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginLeft:25,
+    marginRight:25,
+  },
+  loginButtonText: {
+    color: '#4714CA',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  direction:{
+    flexDirection:'row',
+  },
+  text1:{
+    marginBottom:20,
+    alignSelf:'center',
+    color:'#4714CA',
+    fontSize:20,
+    
+  },
+
 });
 
 export default Forgotpassword;
