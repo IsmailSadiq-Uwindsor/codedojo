@@ -1,16 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from './src/screens/splashscreen';
-import HomeScreen from './src/screens/HomeScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import Forgotpassword from './src/screens/Forgotpassword';
-import Signup from './src/screens/Signup';
-import Forgotlink from './src/screens/Forgotlink';
-import SearchScreen from './src/screens/SearchScreen';
-import CartScreen from './src/screens/CartScreen';
+import SplashScreen from './splashscreen';
+import HomeScreen from './HomeScreen';
+import LoginScreen from './LoginScreen';
+import Forgotpassword from './Forgotpassword';
+import Signup from './Signup';
+import Forgotlink from './Forgotlink';
+import SearchScreen from './SearchScreen';
+import CartScreen from './CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import OtherScreen  from './src/screens/OtherScreen';
+import OtherScreen  from './OtherScreen';
 
 const Stack = createStackNavigator();
 
