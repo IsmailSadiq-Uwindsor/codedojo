@@ -14,10 +14,27 @@ const Signup =()=>{
     <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
     <View style={styles.formContainer}>
     <Text style={styles.text1}>Sign Up Here</Text>  
-    
+    </View>
       <View style={styles.direction}>
       <Icon name="user" style={styles.icon} />
       <TextInput style={styles.input} placeholder="First Name" />
+      </View>
+      <View style={styles.direction}>
+        <Icon name="user" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Last Name" secureTextEntry />
+        </View>
+        <View style={styles.direction}>
+        <Icon name="envelope" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="email id" secureTextEntry />
+        </View>
+        <View style={styles.direction}>
+        <Icon name="lock" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+        </View>
+        <View style={styles.direction}>
+        <Icon name="lock" style={styles.icon} />
+        <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry />
+        </View>
       </View>
   );
 };
