@@ -68,6 +68,25 @@ const logoutUser = asyncHandler( async (req, res) => {
 });
 
 // @desc        Get user profile
+//@route        GET /api/users/unique/:userId
+//@access       Private
+const getUserProfileById = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+        res.status(200).json({
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            purchases: user.purchases
+        });
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+// @desc        Get user profile
 //@route        GET /api/users/profile
 //@access       Private
 const getUserProfile = asyncHandler( async (req, res) => {
@@ -144,6 +163,7 @@ export {
     registerUser,
     logoutUser,
     getUserProfile,
+    getUserProfileById,
     updateUserProfile,
     getUsers,
     getUserById,

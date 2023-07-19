@@ -2,6 +2,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/productsApiSlice';
+import { useGetUserProfileQuery, useGetUserProfileByIdQuery } from '../slices/usersApiSlice';
 import Course from '../components/Course'
 import Rating from '../components/Rating';
 import Loader from "../components/Loader";
@@ -50,13 +51,33 @@ const LearningPathScreen = () => {
     }
 
     let access = false;
+
+    // const { data: profile } = useGetUserProfileQuery();
+    // let UserID
+    // if (userInfo === null) {
+    //   UserID = '64b433e1cdaa858eae794d63'
+    // } else {
+    //   UserID = userInfo.userId
+    // }
+
+    // const { data: profile } = useGetUserProfileByIdQuery(UserID);
+  
+    // console.log("User Profile: "+ profile);
+
     if(userInfo !== null){
-    for (let i = 0; i < userInfo.purchases.length; i++){
-          if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
-            access = true;
-          }
+      // for (let i = 0; i < profile.purchases.length; i++){
+      //     if (profile.isAdmin === true || profile.purchases[i].learningPathId === learningPathId){
+      //       access = true;
+      //     }
+      // }
+      for (let i = 0; i < userInfo.purchases.length; i++){
+        if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
+          access = true;
+        }
       }
     }
+
+  console.log(access)
   
   return (
     <>
