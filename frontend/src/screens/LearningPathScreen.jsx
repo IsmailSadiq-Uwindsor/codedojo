@@ -2,13 +2,14 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/productsApiSlice';
-import { useGetUserProfileQuery, useGetUserProfileByIdQuery } from '../slices/usersApiSlice';
+import { useGetUserProfileQuery } from '../slices/usersApiSlice';
 import Course from '../components/Course'
 import Rating from '../components/Rating';
 import Loader from "../components/Loader";
 import Message from '../components/Message'; 
 import { addToCart } from '../slices/cartSlice';
 import { FaInfoCircle } from "react-icons/fa"
+import { useEffect, useState } from 'react';
 
 const LearningPathScreen = () => {
 
@@ -19,28 +20,16 @@ const LearningPathScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const learningPathData = useGetLearningPathDetailsQuery(learningPathId);
+    const { data : learningPath, isLoading : learningPathIsLoading, isError : learningPathError } = useGetLearningPathDetailsQuery(learningPathId);
 
-    const learningPath = learningPathData.data
-  
-    const learningPathIsLoading = learningPathData.isLoading
-  
-    const learningPathError = learningPathData.isError
-
-    const coursesData = useGetCoursesForLearningPathQuery(learningPathId);
-
-    const courses = coursesData.data
-  
-    const coursesIsLoading = coursesData.isLoading
-  
-    const coursesError = coursesData.isError
+    const { data : courses, isLoading : coursesIsLoading, isError : coursesError } = useGetCoursesForLearningPathQuery(learningPathId);
 
     const addToCartHandler = () => {
       dispatch(addToCart({ ...learningPath}));
       navigate('/cart')
     }
   
-    let local = JSON.parse(localStorage.getItem("cart"));
+    let local = JSON.parse(localStorage.getItem("cart")); 
     let button = false;
     if(local !== null){
     for (let i = 0; i < local.cartItems.length; i++){
@@ -50,35 +39,22 @@ const LearningPathScreen = () => {
       }
     }
 
+    const {data: profile} = useGetUserProfileQuery();
+
     let access = false;
-
-    // const { data: profile } = useGetUserProfileQuery();
-    // let UserID
-    // if (userInfo === null) {
-    //   UserID = '64b433e1cdaa858eae794d63'
-    // } else {
-    //   UserID = userInfo.userId
-    // }
-
-    // const { data: profile } = useGetUserProfileByIdQuery(UserID);
-  
-    // console.log("User Profile: "+ profile);
-
     if(userInfo !== null){
-      // for (let i = 0; i < profile.purchases.length; i++){
-      //     if (profile.isAdmin === true || profile.purchases[i].learningPathId === learningPathId){
-      //       access = true;
-      //     }
-      // }
-      for (let i = 0; i < userInfo.purchases.length; i++){
-        if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
-          access = true;
-        }
+      for (let i = 0; i < profile?.purchases?.length; i++){
+          if (profile.isAdmin === true || profile.purchases[i].learningPathId === learningPathId){
+            access = true;
+          }
       }
+      // for (let i = 0; i < userInfo.purchases.length; i++){
+      //   if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
+      //     access = true;
+      //   }
+      // }
     }
 
-  console.log(access)
-  
   return (
     <>
         <Link className='btn btn-light my-3' to="/learningPaths">Go Back</Link>

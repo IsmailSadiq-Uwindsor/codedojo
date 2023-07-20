@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Order from '../models/orderModel.js';
+import User from '../models/userModel.js';
 
 
 // @desc        Create new order
@@ -57,14 +58,48 @@ const getOrderById = asyncHandler( async (req, res) => {
 });
 
 // @desc        Update order to paid
-//@route        GET /api/orders/:orderId/pay
+//@route        PUT /api/orders/:orderId/pay
 //@access       Private
 const updateOrderToPaid = asyncHandler( async (req, res) => {
-    res.send('update order to paid');
+    const order = await Order.findById(req.params.orderId);
+
+    if (order) {
+        order.isPaid = true;
+        order.paidAt = Date.now();
+        order.paymentResult = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email_address
+        };
+
+        // Map order.orderItems to get the learningPathIds
+        const newPurchases = order.orderItems.map((item, index) => (
+            {learningPathId: item.learningPathId}
+        ));
+
+        // Add the new learningPathIds to what is already existing for the user
+        const user = await User.findById(order.userId._id);
+        let existingPurchases = user.purchases
+        
+        existingPurchases.push(...newPurchases)
+
+        user.purchases = existingPurchases
+
+        await user.save()
+        
+        const updatedOrder = await order.save();
+
+        res.status(200).json(updatedOrder);
+
+    } else {
+        res.status(404);
+        throw new Error('Order not found');
+    }
 });
 
 // @desc        Update order to assigned
-//@route        GET /api/orders/:orderId/assign
+//@route        PUT /api/orders/:orderId/assign
 //@access       Private/Admin
 const updateOrderToAssigned = asyncHandler( async (req, res) => {
     res.send('update order to assigned');

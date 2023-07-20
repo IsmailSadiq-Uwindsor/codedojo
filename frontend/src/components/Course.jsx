@@ -1,21 +1,22 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useGetUserProfileQuery } from '../slices/usersApiSlice';
 
 const Course = ({ learningPathId, course}) => {
 
     const { userInfo } = useSelector((state) => state.auth);
 
+    const {data: profile} = useGetUserProfileQuery();
+
     let access = false;
     if(userInfo !== null){
-    for (let i = 0; i < userInfo.purchases.length; i++){
-          if (userInfo.isAdmin === true || userInfo.purchases[i].learningPathId === learningPathId){
+    for (let i = 0; i < profile?.purchases?.length; i++){
+          if (profile.isAdmin === true || profile.purchases[i].learningPathId === learningPathId){
             access = true;
           }
       }
     }
-
-    // console.log(userInfo.isAdmin)
     
   return (
 

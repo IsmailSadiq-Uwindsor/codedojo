@@ -21,14 +21,19 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     purchases: [
-        {
-            learningPathId: { 
-                type:  mongoose.Schema.Types.ObjectId, 
-                required: false, 
-                ref: "LearningPath" 
+            {
+                learningPathId: { type: String, required: false },
             }
-        }
-    ]
+        ]
+    // purchases: [
+    //     {
+    //         learningPathId: { 
+    //             type:  mongoose.Schema.Types.ObjectId, 
+    //             required: false, 
+    //             ref: "LearningPath" 
+    //         }
+    //     }
+    // ]
 }, {
     timestamps: true
 });
