@@ -7,7 +7,7 @@ const Course = ({ learningPathId, course}) => {
 
     const { userInfo } = useSelector((state) => state.auth);
 
-    const {data: profile} = useGetUserProfileQuery();
+    const { data: profile } = useGetUserProfileQuery();
 
     let access = false;
     if(userInfo !== null){

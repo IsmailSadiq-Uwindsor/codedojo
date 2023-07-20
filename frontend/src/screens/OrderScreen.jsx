@@ -83,6 +83,7 @@ const OrderScreen = () => {
 
   return isLoading ? <Loader/> : error ? <Message variant='dange' /> : (
     <>
+        <Link className='btn btn-light my-3' to="/profile">Profile</Link>
         <h1>Order: {order._id}</h1>
         <Row>
             <Col md={8}>
@@ -156,7 +157,7 @@ const OrderScreen = () => {
 
                       {isPending ? <Loader/> : (
                         <div>
-                          <Button onClick={onAprroveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
+                            {/* <Button onClick={onAprroveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button> */}
                           <div>
                             <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError}></PayPalButtons>
                           </div>

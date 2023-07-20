@@ -39,7 +39,7 @@ const LearningPathScreen = () => {
       }
     }
 
-    const {data: profile} = useGetUserProfileQuery();
+    const { data: profile } = useGetUserProfileQuery();
 
     let access = false;
     if(userInfo !== null){
