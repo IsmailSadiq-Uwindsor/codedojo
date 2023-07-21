@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, Text,Pressable} from 'react-native';
+import { View, TextInput, StyleSheet, Text,Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Forgotpassword =()=>{
   const navigation = useNavigation();
@@ -9,11 +10,11 @@ const Forgotpassword =()=>{
     // Perform login logic here
   
     // Redirect to HomeScreen
-   // navigation.navigate('Forgotlink');
+  navigation.navigate('Forgotlink');
   };
   return(
-    <View style={styles.container}>
-    
+    <SafeAreaView style={styles.container}>
+    <View >
     <View style={styles.formContainer}>
     <Text style={styles.text1}>We will sent a link to reset your password at your mail address.
       </Text>
@@ -21,11 +22,12 @@ const Forgotpassword =()=>{
       <Icon name="envelope" style={styles.icon} />
       <TextInput style={styles.input} placeholder="Enter your email address here" />
       </View>
-      <Pressable style={styles.loginButton} onPress={handlelink}>
-        <Text style={styles.loginButtonText} >Forgot password</Text>
+      <Pressable style={styles.ForgotButton} onPress={handlelink}>
+        <Text style={styles.ForgotText} >Forgot password</Text>
       </Pressable>
     </View>
   </View>
+  </SafeAreaView>
   );
 };
 
@@ -33,28 +35,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-  },
   formContainer: {
-    flex:1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
+  
   icon: {
     marginRight: 10,
     fontSize: 30,
     alignSelf:'center',
-    color: '#4714CA',
+    color: 'black',
   },
   input: {
     width: '85%',
@@ -62,31 +52,35 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     paddingLeft: 10,
     borderRadius: 5,
-    marginBottom:10,
+    
   },
-  loginButton: {
+  ForgotButton: {
     width:'80%',
     height: 40,
-    backgroundColor: '#B79FFF',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     marginLeft:25,
     marginRight:25,
+    marginTop:'4%'
+    
   },
-  loginButtonText: {
-    color: '#4714CA',
+  ForgotText: {
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
   direction:{
     flexDirection:'row',
+    marginTop:'10%'
   },
   text1:{
-    marginBottom:20,
+    marginTop:'50%',
     alignSelf:'center',
-    color:'#4714CA',
+    color:'black',
     fontSize:20,
+    margin:10,
     
   },
 
