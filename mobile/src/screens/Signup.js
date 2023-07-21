@@ -35,7 +35,7 @@ const Signup =()=>{
         <Icon name="lock" style={styles.icon} />
         <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry />
         <Pressable style={styles.signupbutton} onPress={handlesignup}>
-          <Text style={styles.loginButtonText} >Sign Up</Text>
+          <Text style={styles.loginButtonText} >Signnn Up</Text>
         </Pressable>
         </View>
       </View>
