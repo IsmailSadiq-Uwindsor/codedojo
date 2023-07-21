@@ -7,31 +7,31 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: PRODUCTS_URL
             }),
-            keepUnusedDataFor: 20
+            keepUnusedDataFor: 5
         }),
         getLearningPathDetails: builder.query({
             query: (learningPathId) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}`
             }),
-            keepUnusedDataFor: 20
+            keepUnusedDataFor: 5
         }),
         getCoursesForLearningPath: builder.query({
             query: (learningPathId) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses`
             }),
-            keepUnusedDataFor: 20
+            keepUnusedDataFor: 5
         }),
         getCourseDetails: builder.query({
             query: ({learningPathId, courseId}) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses/${courseId}`
             }),
-            keepUnusedDataFor: 20
+            keepUnusedDataFor: 5
         }),
         getQuizzesForCourse: builder.query({
             query: ({learningPathId, courseId}) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses/${courseId}/quizzes`
             }),
-            keepUnusedDataFor: 20
+            keepUnusedDataFor: 5
         }),
     })
 });

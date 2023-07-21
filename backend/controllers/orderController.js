@@ -99,26 +99,6 @@ const updateOrderToPaid = asyncHandler( async (req, res) => {
     }
 });
 
-// @desc        Update order to assigned
-//@route        PUT /api/orders/:orderId/assign
-//@access       Private/Admin
-const updateOrderToAssigned = asyncHandler( async (req, res) => {
-    const order = await Order.findById(req.params.orderId);
-
-    if (order) {
-        order.isPaid = true;
-        order.paidAt = Date.now();
-        order.paymentResult = {
-            id: req.body.id,
-            status: req.body.status,
-            update_time: req.body.update_time,
-            email_address: req.body.payer.email_address
-        }
-        const updatedOrder = await order.save();
-        res.status(200).json(updatedOrder);
-    }
-});
-
 // @desc        Get all orders
 //@route        GET /api/orders
 //@access       Private/Admin
@@ -132,6 +112,5 @@ export {
     getMyOrders,
     getOrderById,
     updateOrderToPaid,
-    updateOrderToAssigned,
     getOrders
 };
