@@ -13,7 +13,7 @@ const Forgotpassword =()=>{
   };
   return(
     <View style={styles.container}>
-    <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+    
     <View style={styles.formContainer}>
     <Text style={styles.text1}>We will sent a link to reset your password at your mail address.
       </Text>

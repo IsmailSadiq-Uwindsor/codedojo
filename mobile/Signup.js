@@ -11,7 +11,7 @@ const Signup =()=>{
 
   return(
     <View style={styles.container}>
-    <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+   
     <View style={styles.formContainer}>
     <Text style={styles.text1}>Sign Up Here</Text>  
     </View>

@@ -13,13 +13,10 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('./assets/BackGround.jpg')}
-        style={styles.imageBackground}
-      >
+     
         <Text style={styles.nameText1}>codeDOJO</Text>
         <Text style={styles.nameText2}>Online Learing Path</Text>
-      </ImageBackground>
+
     </View>
   );
 };
