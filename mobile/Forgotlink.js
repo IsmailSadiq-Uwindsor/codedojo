@@ -15,7 +15,7 @@ const Forgotlink =()=>{
   };
   return(
     <View style={styles.container}>
-      <Image source={require('./assets/BackGround.jpg')} style={styles.backgroundImage} />
+     
       <View style={styles.formContainer}>
       <Text style={styles.text1}>Link has been sent successfully. Kindly check your mailbox.</Text>
         

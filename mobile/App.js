@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from './splashscreen';
+import SplashScreen from './SplashScreen';
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
 import Forgotpassword from './Forgotpassword';
@@ -9,7 +9,7 @@ import Signup from './Signup';
 import Forgotlink from './Forgotlink';
 import SearchScreen from './SearchScreen';
 import CartScreen from './CartScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileScreen from './ProfileScreen';
 import OtherScreen  from './OtherScreen';
 
 const Stack = createStackNavigator();
