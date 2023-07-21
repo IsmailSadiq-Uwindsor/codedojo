@@ -26,7 +26,7 @@ const Course = ({ learningPathId, course}) => {
             {/* </a> */}
             { access  ?
                 <Card.Body>
-                    <Link to={`/login?redirect=/learningPaths/${learningPathId}/courses/${course._id}/quizzes`}>
+                    <Link to={`/login?redirect=/learningpaths/${learningPathId}/courses/${course._id}/quizzes`}>
                         <Card.Title as='div' className='product-title'>
                             <strong>{course.title}</strong>
                         </Card.Title>

@@ -31,7 +31,7 @@ const CourseScreen = () => {
 
   return (
     <>
-        <Link className='btn btn-light my-3' to={`/learningPaths/${learningPathId}/courses`}>Go Back</Link>
+        <Link className='btn btn-light my-3' to={`/learningpaths/${learningPathId}/courses`}>Go Back</Link>
 
         {courseIsLoading ? (
            <Loader/>

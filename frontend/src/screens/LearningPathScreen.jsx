@@ -57,7 +57,7 @@ const LearningPathScreen = () => {
 
   return (
     <>
-        <Link className='btn btn-light my-3' to="/learningPaths">Go Back</Link>
+        <Link className='btn btn-light my-3' to="/learningpaths">Go Back</Link>
 
         {learningPathIsLoading ? (
           <Loader/>

@@ -31,7 +31,7 @@ const Header = () => {
     <header>
         <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
             <Container>
-                <LinkContainer to='/learningPaths'>
+                <LinkContainer to='/learningpaths'>
                 <Navbar.Brand>
                     {/* <img src={logo} alt='CodeDOJO'/> */}
                     CodeDOJO
@@ -65,6 +65,19 @@ const Header = () => {
                             <LinkContainer to='/login'>
                                 <Nav.Link href='/login'><FaUser/> Sign In</Nav.Link>
                             </LinkContainer>
+                        )}
+                        { userInfo && userInfo.isAdmin && (
+                            <NavDropdown title='Admin' id='adminmenu'>
+                                <LinkContainer to='/admin/learningpathlist'>
+                                    <NavDropdown.Item>LearningPaths</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to='/admin/userlist'>
+                                    <NavDropdown.Item>Users</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to='/admin/orderlist'>
+                                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                                </LinkContainer>
+                            </NavDropdown>
                         )}
                     </Nav>
                 </Navbar.Collapse>

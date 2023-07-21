@@ -6,11 +6,11 @@ const LearningPath = ({learningPath}) => {
     
   return (
     <Card className='my-3 p-3 rounded'>
-        <Link to={`/learningPaths/${learningPath._id}/courses`}/>
+        <Link to={`/learningpaths/${learningPath._id}/courses`}/>
             {/* <Card.Img src={learningPath.image} variant="top"/> */}
         {/* </a> */}
         <Card.Body>
-            <Link to={`/learningPaths/${learningPath._id}/courses`}>
+            <Link to={`/learningpaths/${learningPath._id}/courses`}>
                 <Card.Title as='div' className='product-title'>
                     <strong>{learningPath.name}</strong>
                 </Card.Title>
