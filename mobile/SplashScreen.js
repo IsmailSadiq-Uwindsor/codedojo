@@ -1,26 +1,22 @@
 import React, { useEffect } from 'react';
-import { View, ImageBackground, Text, StyleSheet,Dimensions } from 'react-native';
+import { View, ImageBackground, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const { width, height } = Dimensions.get('window');
-
-const SplashScreen = ({ navigation }) => {
+const splashscreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('LoginScreen');
-    }, 3000); // Adjust the delay time as needed
+    }, 1000); // Adjust the delay time as needed
   }, []);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('./assets/BackGround.jpg')}
-        style={styles.imageBackground}
-      >
+    <SafeAreaView style={styles.container}>
+    <View>
         <Text style={styles.nameText1}>codeDOJO</Text>
         <Text style={styles.nameText2}>Online Learing Path</Text>
-      </ImageBackground>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -28,25 +24,20 @@ const SplashScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:width,
-    height:height,
-  },
-  imageBackground: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor:'black',
+    justifyContent:'center',
+    alignItems:'center',
   },
   nameText1: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#4A17CC',
+    color: 'white',
   },
   nameText2: {
     fontSize: 24,
-    color: '#4A17CC',
+    color: 'white',
   }
 });
 
 
-export default SplashScreen;
+export default splashscreen;
