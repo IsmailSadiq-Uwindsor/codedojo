@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image, Text,Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  responsiveScreenWidth,
+  responsiveScreenHeight,
+  responsiveFontSize,
+} from 'react-native-responsive-screen';
 
 import { useNavigation} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
 
@@ -11,7 +17,7 @@ const LoginScreen = () => {
     // Perform login logic here
   
     // Redirect to HomeScreen
-    navigation.navigate('HomeScreen');
+    navigation.navigate('MainContainer');
   };
   const handleForgorpassword = () => {
     // Perform login logic here
@@ -28,8 +34,8 @@ const LoginScreen = () => {
 
 
   return (
-    <View style={styles.container}>
-     
+    <SafeAreaView style={styles.container}>
+    <View >
       <View style={styles.formContainer}>
       <Text style={styles.text1}>Welcome to codeDOJO</Text>  
       <Text style={styles.text2}>Enter your login credential here..</Text>
@@ -54,6 +60,7 @@ const LoginScreen = () => {
         </Pressable>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -62,28 +69,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-  },
   formContainer: {
-    flex:1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: '10%',
   },
   icon: {
     marginRight: 10,
     fontSize: 30,
     alignSelf:'center',
-    color: '#4714CA',
+    color: 'black',
   },
   input: {
     width: '85%',
@@ -91,20 +90,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     paddingLeft: 10,
     borderRadius: 5,
-    marginBottom:10,
+    marginTop:'3%',
   },
   loginButton: {
     width:'80%',
     height: 40,
-    backgroundColor: '#B79FFF',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     marginLeft:25,
     marginRight:25,
+    marginTop:'10%'
   },
   loginButtonText: {
-    color: '#4714CA',
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -112,36 +112,37 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   text1:{
-    marginBottom:50,
+    marginTop:'30%',
     alignSelf:'center',
-    color:'#4714CA',
+    color:'black',
     fontSize:30,
-    
   },
 
   text2:{
-    color:'#4714CA',
+    color:'black',
     fontSize:15,
-    marginBottom:10,
+    marginTop:'10%',
   },
   text3:{
-    color:'#4714CA',
+    color:'black',
     alignSelf:'center',
-    marginTop:10,
+    marginTop:'5%',
+    
   },
   text4:{
-    color:'#4714CA',
-    marginTop:20,
+    color:'black',
+    marginTop:'10%',
+    
   },
   text5:{
-    marginBottom:5,
-    color:'#4714CA',
+    marginTop:'auto',
+    color:'black',
   },
   signup:{
-    marginBottom:10,
+    marginTop:'5%',
     width:'50%',
     height: 40,
-    backgroundColor: '#B79FFF',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
