@@ -34,7 +34,7 @@ const learningPathSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false
     },
     description: {
         type: String,
@@ -50,7 +50,7 @@ const learningPathSchema = new mongoose.Schema({
     },
     learningPathSlug: {
         type: String,
-        required: true
+        required: false
     },
     reviews: [reviewSchema],
     rating: {
@@ -61,7 +61,7 @@ const learningPathSchema = new mongoose.Schema({
     numReviews: {
         type: Number,
         required: true,
-        default: 0
+        default: 0.0
     },
     price: {
         type: Number,
@@ -71,7 +71,7 @@ const learningPathSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     courses: {
         type: Array,

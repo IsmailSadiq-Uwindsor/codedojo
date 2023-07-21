@@ -4,11 +4,14 @@ import {
     getLearningPathById, 
     getCoursesForLearningPath, 
     getCourseById, 
-    getQuizzesForCourse 
+    getQuizzesForCourse, 
+    createLearningPath
 } from '../controllers/productController.js';
+import {protect, admin} from '../middleware/authMiddleware.js';
+
 const router = express.Router();
 
-router.route('/').get(getLearningPaths);
+router.route('/').get(getLearningPaths).post(protect, admin, createLearningPath);
 
 router.route('/:learningPathId').get(getLearningPathById);
 

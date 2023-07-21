@@ -33,8 +33,15 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor: 5
         }),
+        createLearningPath: builder.mutation({
+            query: () => ({
+                url: PRODUCTS_URL,
+                method: 'POST',
+            }),
+            invalidatesTags: ['LearningPath']
+        })
     })
 });
 
-export const { useGetLearningPathsQuery, useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery, useGetCourseDetailsQuery, useGetQuizzesForCourseQuery } = learningPathsApiSlice;
+export const { useGetLearningPathsQuery, useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery, useGetCourseDetailsQuery, useGetQuizzesForCourseQuery, useCreateLearningPathMutation } = learningPathsApiSlice;
 

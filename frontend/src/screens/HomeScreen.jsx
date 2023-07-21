@@ -22,9 +22,11 @@ const HomeScreen = () => {
           <h1>Learning Paths</h1>
           <Row>
               {learningPaths.map( (learningPath) => (
-                  <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>
-                      <LearningPath learningPath={learningPath}/>
-                  </Col>
+                  // {learningPath.isActive && 
+                    <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>
+                        <LearningPath learningPath={learningPath}/>
+                    </Col>
+                  // }
               ))}
           </Row>
         </>) } 

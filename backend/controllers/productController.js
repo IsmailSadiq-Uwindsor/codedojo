@@ -2,6 +2,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import LearningPath from '../models/learningPathModel.js';
 import Course from '../models/courseModel.js';
 import Quiz from '../models/quizModel.js';
+import User from '../models/userModel.js'
 
 
 // @desc        Fetch all LearningPaths
@@ -65,10 +66,30 @@ const getQuizzesForCourse = asyncHandler( async (req, res) => {
     }
 });
 
+// @desc        Create a LearningPath
+//@route        POST /api/learningPaths
+//@access       Private/Admin
+const createLearningPath = asyncHandler( async (req, res) => {
+    const  learningPath = new LearningPath ({
+        userId: req.user._id,
+        name: 'Sample name',
+        description: 'Sample description',
+        language: 'Sample language',
+        category: 'Sample category',
+        // price: 0,
+        // numReviews: 0,
+        
+    })
+
+    const createdLearningPath = await learningPath.save();
+    res.status(201).json(createdLearningPath);
+});
+
 export { 
     getLearningPaths, 
     getLearningPathById, 
     getCoursesForLearningPath, 
     getCourseById, 
-    getQuizzesForCourse 
+    getQuizzesForCourse,
+    createLearningPath
 };

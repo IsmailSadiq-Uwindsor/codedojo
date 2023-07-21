@@ -1,17 +1,31 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
-import { useGetLearningPathsQuery } from '../../slices/productsApiSlice';
+import { useGetLearningPathsQuery, useCreateLearningPathMutation } from '../../slices/productsApiSlice';
 
 
 const LearningPathListScreen = () => {
 
-    const { data: learningPaths, isLoading, error } = useGetLearningPathsQuery();
+    const { data: learningPaths, isLoading, error, refetch } = useGetLearningPathsQuery();
+
+    const [createLearningPath, { isLoading: loadingCreate }] = useCreateLearningPathMutation();
 
     const deleteHandler = (id) => {
         console.log('delete', id)
+    }
+
+    const createLearningPathHandler = async () => {
+        if (window.confirm('Are you sure you want to create a new Learning Path?')) {
+            try {
+                await createLearningPath();
+                refetch();
+            } catch (err) {
+                toast.error(err?.data?.message || err.error)
+            }
+        }
     }
 
   return (
@@ -21,11 +35,14 @@ const LearningPathListScreen = () => {
                 <h1>LearningPaths</h1>
             </Col>
             <Col className='text-end'>
-                <Button className='btn-sm m-3'>
+                <Button className='btn-sm m-3' onClick={ createLearningPathHandler }>
                     <FaEdit/> Create LearningPath
                 </Button>
             </Col>
         </Row>
+
+        {loadingCreate && <Loader/>}
+
         {
         isLoading ? <Loader/> : error ? <Message  variant='danger'>{error}</Message> : (
             <>
