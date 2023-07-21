@@ -13,7 +13,6 @@ const getLearningPaths = asyncHandler( async (req, res) => {
     res.json(learningPathList);
 });
 
-
 // @desc        Fetch a LearningPath
 //@route        GET /api/learningPaths/:learningPathId
 //@access       Public
@@ -67,7 +66,7 @@ const getQuizzesForCourse = asyncHandler( async (req, res) => {
 });
 
 // @desc        Create a LearningPath
-//@route        POST /api/learningPaths
+//@route        POST /api/learningpaths
 //@access       Private/Admin
 const createLearningPath = asyncHandler( async (req, res) => {
     const  learningPath = new LearningPath ({
@@ -76,13 +75,68 @@ const createLearningPath = asyncHandler( async (req, res) => {
         description: 'Sample description',
         language: 'Sample language',
         category: 'Sample category',
-        // price: 0,
-        // numReviews: 0,
-        
     })
-
     const createdLearningPath = await learningPath.save();
     res.status(201).json(createdLearningPath);
+});
+
+// @desc        Update a LearningPath
+//@route        PUT /api/learningpaths/:learningPathId
+//@access       Private/Admin
+const updateLearningPath = asyncHandler( async (req, res) => {
+    const { name, description, language, category,  price, isActive } = req.body;
+
+    const learningPath = await LearningPath.findById(req.params.learningPathId);
+
+    if (learningPath) {
+        learningPath.name = name;
+        learningPath.description = description;
+        learningPath.language = language;
+        learningPath.category = category;
+        learningPath.price = price;
+        learningPath.isActive = isActive;
+
+        const updatedLearningPath = await learningPath.save();
+        res.status(200).json(updatedLearningPath);
+    } else {
+        res.status(404);
+        throw new Error('Resource not found');
+    }
+});
+
+// @desc        Create a Course
+//@route        POST /api/learningpaths/:learningPathId/courses
+//@access       Private/Admin
+const createCourse = asyncHandler( async (req, res) => {
+    const  course = new Course ({
+        userId: req.user._id,
+        learningPathId: req.params.learningPathId,
+        title: 'Sample title',
+        abstract: 'Sample abstract'
+    })
+    const createdCourse = await course.save();
+    res.status(201).json(createdCourse);
+});
+
+// @desc        Update a Course
+//@route        PUT /api/learningpaths/:learningPathId/courses/:courseId
+//@access       Private/Admin
+const updateCourse = asyncHandler( async (req, res) => {
+    const { title, abstract, video } = req.body;
+
+    const course = await Course.findOne({learningPathId: req.params.learningPathId, _id: req.params.courseId});
+
+    if (course) {
+        course.title = title;
+        course.abstract = abstract;
+        course.video = video;
+
+        const updatedCourse = await course.save();
+        res.status(200).json(updatedCourse);
+    } else {
+        res.status(404);
+        throw new Error('Resource not found');
+    }
 });
 
 export { 
@@ -91,5 +145,8 @@ export {
     getCoursesForLearningPath, 
     getCourseById, 
     getQuizzesForCourse,
-    createLearningPath
+    createLearningPath,
+    updateLearningPath,
+    createCourse,
+    updateCourse
 };

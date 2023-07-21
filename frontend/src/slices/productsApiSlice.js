@@ -7,6 +7,7 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: PRODUCTS_URL
             }),
+            providesTags: ['LearningPaths'],
             keepUnusedDataFor: 5
         }),
         getLearningPathDetails: builder.query({
@@ -19,6 +20,7 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             query: (learningPathId) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses`
             }),
+            providesTags: ['Courses'],
             keepUnusedDataFor: 5
         }),
         getCourseDetails: builder.query({
@@ -38,10 +40,43 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
                 url: PRODUCTS_URL,
                 method: 'POST',
             }),
-            invalidatesTags: ['LearningPath']
-        })
+            invalidatesTags: ['LearningPaths']
+        }),
+        updateLearningPath: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/${data.learningPathId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: ['LearningPaths']
+        }),
+        createCourse: builder.mutation({
+            query: (learningPathId) => ({
+                url: `${PRODUCTS_URL}/${learningPathId}/courses`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Courses']
+        }),
+        updateCourse: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/${data.learningPathId}/courses/${data.courseId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: ['Courses']
+        }),
     })
 });
 
-export const { useGetLearningPathsQuery, useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery, useGetCourseDetailsQuery, useGetQuizzesForCourseQuery, useCreateLearningPathMutation } = learningPathsApiSlice;
+export const { 
+    useGetLearningPathsQuery, 
+    useGetLearningPathDetailsQuery, 
+    useGetCoursesForLearningPathQuery, 
+    useGetCourseDetailsQuery, 
+    useGetQuizzesForCourseQuery, 
+    useCreateLearningPathMutation,
+    useUpdateLearningPathMutation,
+    useCreateCourseMutation,
+    useUpdateCourseMutation
+} = learningPathsApiSlice;
 

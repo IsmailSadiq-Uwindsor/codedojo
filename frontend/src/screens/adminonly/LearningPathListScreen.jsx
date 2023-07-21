@@ -1,4 +1,5 @@
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify'
@@ -8,6 +9,8 @@ import { useGetLearningPathsQuery, useCreateLearningPathMutation } from '../../s
 
 
 const LearningPathListScreen = () => {
+
+    const { learningPathId: learningPathId } = useParams();
 
     const { data: learningPaths, isLoading, error, refetch } = useGetLearningPathsQuery();
 
@@ -60,7 +63,11 @@ const LearningPathListScreen = () => {
                     <tbody>
                         { learningPaths.map((learningPath) => (
                                 <tr key={learningPath._id}>
-                                    <td>{learningPath._id}</td>
+                                    <td>
+                                        <Link to={`/admin/learningpath/${learningPath._id}/courselist`}>
+                                            {learningPath._id}
+                                        </Link>
+                                    </td>
                                     <td>{learningPath.name}</td>
                                     <td>CA$ {learningPath.price}</td>
                                     <td>{learningPath.category}</td>

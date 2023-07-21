@@ -19,21 +19,25 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    video: {
+        type: String,
+        required: false
+    },
     tags: {
         type: Array,
-        required: true
+        required: false
     },
     courseSlug: {
         type: String,
-        required: true
+        required: false
     },
     credits: {
         type: Number,
-        required: true
+        required: false
     },
     category: {
         type: String,
-        required: true
+        required: false
     }
 }, {
     timestamps: true
