@@ -54,7 +54,7 @@ const OrderScreen = () => {
       });
     }
 
-    async function onAprroveTest() {
+    async function payOrderHandler() {
       await payOrder ({orderId, details: {payer: {} }});
       refetch();
       toast.success('Payment successful');
@@ -83,7 +83,7 @@ const OrderScreen = () => {
 
   return isLoading ? <Loader/> : error ? <Message variant='dange' /> : (
     <>
-        <Link className='btn btn-light my-3' to="/profile">Profile</Link>
+        {/* <Link className='btn btn-light my-3' to="/profile">Profile</Link> */}
         <h1>Order: {order._id}</h1>
         <Row>
             <Col md={8}>
@@ -157,7 +157,7 @@ const OrderScreen = () => {
 
                       {isPending ? <Loader/> : (
                         <div>
-                            {/* <Button onClick={onAprroveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button> */}
+                            {/* <Button onClick={payOrderHandler} style={{marginBottom: '10px'}}>Test Pay Order</Button> */}
                           <div>
                             <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError}></PayPalButtons>
                           </div>
@@ -166,6 +166,12 @@ const OrderScreen = () => {
                     </ListGroup.Item>
                   )}
                 
+                  { loadingPay && <Loader/>}
+                  { userInfo && userInfo.isAdmin && !order.isPaid && (
+                    <ListGroup.Item>
+                      <Button type='button' className='btn btn-block' onClick={payOrderHandler}>Mark as Paid</Button>
+                    </ListGroup.Item>
+                  )}
                 </ListGroup>
               </Card>
             </Col>

@@ -39,7 +39,8 @@ const addOrderItems = asyncHandler( async (req, res) => {
 //@route        GET /api/orders/myorders
 //@access       Private
 const getMyOrders = asyncHandler( async (req, res) => {
-    const orders = await Order.find({ user: req.user.userId })
+    const userProfile = await User.findById(req.user._id);
+    const orders = await Order.find({ userId: userProfile._id })
     res.status(200).json(orders);
 });
 
@@ -102,14 +103,28 @@ const updateOrderToPaid = asyncHandler( async (req, res) => {
 //@route        PUT /api/orders/:orderId/assign
 //@access       Private/Admin
 const updateOrderToAssigned = asyncHandler( async (req, res) => {
-    res.send('update order to assigned');
+    const order = await Order.findById(req.params.orderId);
+
+    if (order) {
+        order.isPaid = true;
+        order.paidAt = Date.now();
+        order.paymentResult = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email_address
+        }
+        const updatedOrder = await order.save();
+        res.status(200).json(updatedOrder);
+    }
 });
 
 // @desc        Get all orders
 //@route        GET /api/orders
 //@access       Private/Admin
 const getOrders = asyncHandler( async (req, res) => {
-    res.send('get all orders');
+   const orders = await Order.find({}).populate('userId', 'id name');
+   res.status(200).json(orders);
 });
 
 export {
