@@ -85,9 +85,7 @@ const createLearningPath = asyncHandler( async (req, res) => {
 //@access       Private/Admin
 const updateLearningPath = asyncHandler( async (req, res) => {
     const { name, description, language, category,  price, isActive } = req.body;
-
     const learningPath = await LearningPath.findById(req.params.learningPathId);
-
     if (learningPath) {
         learningPath.name = name;
         learningPath.description = description;
@@ -108,10 +106,7 @@ const updateLearningPath = asyncHandler( async (req, res) => {
 //@route        DELETE /api/learningpaths/:learningPathId
 //@access       Private/Admin
 const deleteLearningPath = asyncHandler( async (req, res) => {
-
     const learningPath = await LearningPath.findById(req.params.learningPathId);
-    // const courseList = await Course.find({learningPathId: req.params.learningPathId})
-
     if (learningPath) {
         await LearningPath.deleteOne({ _id: learningPath._id});
         await Course.deleteMany({learningPathId: learningPath._id})
@@ -142,9 +137,7 @@ const createCourse = asyncHandler( async (req, res) => {
 //@access       Private/Admin
 const updateCourse = asyncHandler( async (req, res) => {
     const { title, abstract, url } = req.body;
-
     const course = await Course.findOne({learningPathId: req.params.learningPathId, _id: req.params.courseId});
-
     if (course) {
         course.title = title;
         course.abstract = abstract;
@@ -162,12 +155,46 @@ const updateCourse = asyncHandler( async (req, res) => {
 //@route        DELETE /api/learningpaths/:learningPathId/courses/:courseId
 //@access       Private/Admin
 const deleteCourse = asyncHandler( async (req, res) => {
-
     const course = await Course.findOne({learningPathId: req.params.learningPathId, _id: req.params.courseId});
-
     if (course) {
         await Course.deleteOne({ _id: course._id, learningPathId: course.learningPathId});
         res.status(200).json({message: 'Course deleted'})
+    } else {
+        res.status(404);
+        throw new Error('Resource not found');
+    }
+});
+
+// @desc        Create a new review
+//@route        POST /api/learningpaths/:learningPathId/reviews
+//@access       Private
+const createLearningPathReview = asyncHandler( async (req, res) => {
+    const { rating, comment } = req.body;
+    const learningPath = await LearningPath.findById(req.params.learningPathId);
+    if (learningPath) {
+       const alreadyReviewed = learningPath.reviews.find( (review) => review.userId.toString() === req.user._id.toString() );
+       if(alreadyReviewed) {
+        res.status(400);
+        throw new Error('LearningPath already reviewed');
+       }
+
+       const review = {
+        name: req.user.name,
+        rating: Number(rating),
+        comment,
+        userId: req.user._id
+       }
+
+       learningPath.reviews.push(review);
+
+       learningPath.numReviews = products.reviews.length;
+
+       learningPath.rating = learningPath.reviews.reduce((acc, review) => acc + review.rating, 0) / learningPath.reviews.length;
+
+       await learningPath.save();
+
+       res.status(201).json({message: 'Review added'})
+
     } else {
         res.status(404);
         throw new Error('Resource not found');
@@ -185,5 +212,6 @@ export {
     deleteLearningPath,
     createCourse,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    createLearningPathReview
 };

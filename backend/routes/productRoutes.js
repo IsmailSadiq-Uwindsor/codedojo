@@ -10,7 +10,8 @@ import {
     deleteLearningPath,
     createCourse,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    createLearningPathReview
 } from '../controllers/productController.js';
 import {protect, admin} from '../middleware/authMiddleware.js';
 
@@ -25,5 +26,7 @@ router.route('/:learningPathId/courses').get(getCoursesForLearningPath).post(pro
 router.route('/:learningPathId/courses/:courseId').get(getCourseById).put(protect, admin, updateCourse).delete(protect, admin, deleteCourse);
 
 router.route('/:learningPathId/courses/:courseId/quizzes').get(getQuizzesForCourse);
+
+router.route('/:learningPathId/reviews').post(protect, createLearningPathReview);
 
 export default router;

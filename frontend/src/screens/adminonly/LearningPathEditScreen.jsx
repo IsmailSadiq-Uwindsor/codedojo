@@ -78,7 +78,7 @@ const LearningPathEditScreen = () => {
 
                     <Form.Group controlId="price" className="my-2">
                         <Form.Label>Price</Form.Label>
-                        <Form.Control type="number" placeholder="Enter Price" value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
+                        <Form.Control type="number" pattern="[0-9]*" placeholder="Enter Price" value={price} onChange={(e) => setPrice(e.target.value)}></Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="language" className="my-2">
