@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './LoginScreen';
@@ -13,12 +13,12 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="splashscreen" headerMode="none">
+      <Stack.Navigator initialRouteName="SplashScreen" headerMode="none">
         <Stack.Screen name="LoginScreen" component={LoginScreen}/>
         <Stack.Screen name="Forgotpassword" component={Forgotpassword}/>
         <Stack.Screen name="Signup" component={Signup}/>
         <Stack.Screen name="Forgotlink" component={Forgotlink}/>
-        <Stack.Screen name="MainContainer" component={MainContainer}/>
+        <Stack.Screen name="MainContainer" component={MainContainer} headershown="false"/>
         <Stack.Screen name='CourseDetailScreen' component={CourseDetailScreen}/>
         <Stack.Screen name='PurchaseScreen' component={PurchaseScreen}/>
         </Stack.Navigator>
