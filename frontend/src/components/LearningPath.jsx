@@ -17,7 +17,7 @@ const LearningPath = ({learningPath}) => {
             </Link>
 
             <Card.Text as='div'>
-                <Rating value={learningPath.rating} text={`${learningPath.numReviews} reviews`}/>
+                <Rating value={learningPath.rating} text={`${learningPath.numReviews} review(s)`}/>
             </Card.Text>
 
             <Card.Text as='h3'>

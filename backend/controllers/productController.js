@@ -9,8 +9,11 @@ import User from '../models/userModel.js'
 //@route        GET /api/learningPaths
 //@access       Public
 const getLearningPaths = asyncHandler( async (req, res) => {
-    const learningPathList = await LearningPath.find({});
-    res.json(learningPathList);
+    const pageSize = 4;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await LearningPath.countDocuments();
+    const learningPaths = await LearningPath.find({}).limit(pageSize).skip(pageSize*(page-1));
+    res.json({learningPaths, page, pages: Math.ceil(count/pageSize)});
 });
 
 // @desc        Fetch a LearningPath

@@ -2,19 +2,14 @@ import {Row, Col} from 'react-bootstrap';
 import { useGetLearningPathsQuery } from '../slices/productsApiSlice';
 import LearningPath from '../components/LearningPath';
 import Loader from "../components/Loader";
-import Message from '../components/Message'; 
+import Message from '../components/Message';
+import { useParams } from 'react-router-dom'; 
 
 const HomeScreen = () => {
 
-  const learningPathsData = useGetLearningPathsQuery();
+  const { pageNumber } = useParams();
 
-  const learningPaths = learningPathsData.data
-
-  const isLoading = learningPathsData.isLoading
-
-  const error = learningPathsData.isError
-
-  // console.log(learningPaths)
+  const {data, isLoading, error }  = useGetLearningPathsQuery({pageNumber});
 
   return (
     <>
@@ -23,7 +18,7 @@ const HomeScreen = () => {
         ) : error ? (<Message variant='danger'>{ error?.data?.message || error.error }</Message>) : (<>
           <h1>Learning Paths</h1>
           <Row>
-              {learningPaths.map( (learningPath) => (
+              {data.learningPaths.map( (learningPath) => (
                   learningPath.isActive && 
                   ( 
                     <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>

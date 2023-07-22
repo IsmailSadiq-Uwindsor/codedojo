@@ -102,7 +102,7 @@ const LearningPathScreen = () => {
                       <ListGroup.Item><strong>LearningPath Description:</strong> {learningPath.description}</ListGroup.Item>  
                       <ListGroup.Item><strong>Price:</strong> ${learningPath.price}</ListGroup.Item>
                       <ListGroup.Item>
-                          <Rating value={learningPath.rating} text={`${learningPath.numReviews} reviews`}/>
+                          <Rating value={learningPath.rating} text={`${learningPath.numReviews} review(s)`}/>
                       </ListGroup.Item>  
                       <ListGroup.Item></ListGroup.Item>        
                 </ListGroup>
