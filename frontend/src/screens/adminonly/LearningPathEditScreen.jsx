@@ -55,7 +55,6 @@ const LearningPathEditScreen = () => {
             navigate('/admin/learningpathlist')
         }
     }
-    console.log(learningPath)
 
   return (
     <>

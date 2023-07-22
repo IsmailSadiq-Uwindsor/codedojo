@@ -5,19 +5,27 @@ import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
-import { useGetLearningPathsQuery, useCreateLearningPathMutation } from '../../slices/productsApiSlice';
+import { useGetLearningPathsQuery, useCreateLearningPathMutation, useDeleteLearningPathMutation } from '../../slices/productsApiSlice';
 
 
 const LearningPathListScreen = () => {
 
-    const { learningPathId: learningPathId } = useParams();
-
     const { data: learningPaths, isLoading, error, refetch } = useGetLearningPathsQuery();
 
-    const [createLearningPath, { isLoading: loadingCreate }] = useCreateLearningPathMutation();
+    const [ createLearningPath, { isLoading: loadingCreate }] = useCreateLearningPathMutation();
 
-    const deleteHandler = (id) => {
-        console.log('delete', id)
+    const [ deleteLearningPath, {isLoading: loadingDelete }] = useDeleteLearningPathMutation();
+
+    const deleteHandler = async (learningPathId) => {
+        if (window.confirm('Are you sure? This will delete the Learning Path and all its Courses.')) {
+            try {
+                await deleteLearningPath(learningPathId);
+                refetch();
+                toast.success('LearningPath and Courses Deleted');
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        }
     }
 
     const createLearningPathHandler = async () => {
@@ -25,6 +33,7 @@ const LearningPathListScreen = () => {
             try {
                 await createLearningPath();
                 refetch();
+                toast.success('LearningPath Created');
             } catch (err) {
                 toast.error(err?.data?.message || err.error)
             }
@@ -45,6 +54,7 @@ const LearningPathListScreen = () => {
         </Row>
 
         {loadingCreate && <Loader/>}
+        {loadingDelete && <Loader/>}
 
         {
         isLoading ? <Loader/> : error ? <Message  variant='danger'>{error}</Message> : (

@@ -5,7 +5,7 @@ import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
-import { useGetCoursesForLearningPathQuery, useCreateCourseMutation } from '../../slices/productsApiSlice';
+import { useGetCoursesForLearningPathQuery, useCreateCourseMutation, useDeleteCourseMutation } from '../../slices/productsApiSlice';
 
 
 const CourseListScreen = () => {
@@ -14,12 +14,20 @@ const CourseListScreen = () => {
 
     const { data: courses, isLoading, error, refetch } = useGetCoursesForLearningPathQuery(learningPathId);
 
-    console.log(courses)
-
     const [createCourse, { isLoading: loadingCreate }] = useCreateCourseMutation(learningPathId);
 
-    const deleteHandler = (id) => {
-        console.log('delete', id)
+    const [ deleteCourse, {isLoading: loadingDelete }] = useDeleteCourseMutation();
+
+    const deleteHandler = async (learningPathId, courseId) => {
+        if (window.confirm('Are you sure? This will delete the Course.')) {
+            try {
+                await deleteCourse({learningPathId, courseId});
+                refetch();
+                toast.success('Course Deleted');
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        }
     }
 
     const createCoursethHandler = async () => {
@@ -27,6 +35,7 @@ const CourseListScreen = () => {
             try {
                 await createCourse(learningPathId);
                 refetch();
+                toast.success('Course Created');
             } catch (err) {
                 toast.error(err?.data?.message || err.error)
             }
@@ -48,6 +57,7 @@ const CourseListScreen = () => {
         </Row>
 
         {loadingCreate && <Loader/>}
+        {loadingDelete && <Loader/>}
 
         {
         isLoading ? <Loader/> : error ? <Message  variant='danger'>{error}</Message> : (
@@ -76,7 +86,7 @@ const CourseListScreen = () => {
                                         <LinkContainer to={`/admin/learningpath/${learningPathId}/course/${course._id}/edit`}>
                                             <Button variant='light' className='btn-sm mx-2'><FaEdit/></Button>
                                         </LinkContainer>
-                                        <Button variant='danger' className='btn-sm' onClick={ () => deleteHandler(course._id)}><FaTrash style={{color: 'white'}}/></Button>
+                                        <Button variant='danger' className='btn-sm' onClick={ () => deleteHandler(course.learningPathId, course._id)}><FaTrash style={{color: 'white'}}/></Button>
                                     </td>
                                 </tr>
                             )

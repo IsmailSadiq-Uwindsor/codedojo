@@ -104,6 +104,24 @@ const updateLearningPath = asyncHandler( async (req, res) => {
     }
 });
 
+// @desc        Delete a LearningPath
+//@route        DELETE /api/learningpaths/:learningPathId
+//@access       Private/Admin
+const deleteLearningPath = asyncHandler( async (req, res) => {
+
+    const learningPath = await LearningPath.findById(req.params.learningPathId);
+    // const courseList = await Course.find({learningPathId: req.params.learningPathId})
+
+    if (learningPath) {
+        await LearningPath.deleteOne({ _id: learningPath._id});
+        await Course.deleteMany({learningPathId: learningPath._id})
+        res.status(200).json({message: 'LearningPath and Courses deleted'})
+    } else {
+        res.status(404);
+        throw new Error('Resource not found');
+    }
+});
+
 // @desc        Create a Course
 //@route        POST /api/learningpaths/:learningPathId/courses
 //@access       Private/Admin
@@ -140,6 +158,22 @@ const updateCourse = asyncHandler( async (req, res) => {
     }
 });
 
+// @desc        Delete a Course
+//@route        DELETE /api/learningpaths/:learningPathId/courses/:courseId
+//@access       Private/Admin
+const deleteCourse = asyncHandler( async (req, res) => {
+
+    const course = await Course.findOne({learningPathId: req.params.learningPathId, _id: req.params.courseId});
+
+    if (course) {
+        await Course.deleteOne({ _id: course._id, learningPathId: course.learningPathId});
+        res.status(200).json({message: 'Course deleted'})
+    } else {
+        res.status(404);
+        throw new Error('Resource not found');
+    }
+});
+
 export { 
     getLearningPaths, 
     getLearningPathById, 
@@ -148,6 +182,8 @@ export {
     getQuizzesForCourse,
     createLearningPath,
     updateLearningPath,
+    deleteLearningPath,
     createCourse,
-    updateCourse
+    updateCourse,
+    deleteCourse
 };

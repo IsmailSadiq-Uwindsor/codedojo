@@ -50,6 +50,12 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['LearningPaths']
         }),
+        deleteLearningPath: builder.mutation({
+            query: (learningPathId) => ({
+                url: `${PRODUCTS_URL}/${learningPathId}`,
+                method: 'DELETE'
+            })
+        }),
         createCourse: builder.mutation({
             query: (learningPathId) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses`,
@@ -65,6 +71,12 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Courses']
         }),
+        deleteCourse: builder.mutation({
+            query: ({learningPathId, courseId}) => ({
+                url: `${PRODUCTS_URL}/${learningPathId}/courses/${courseId}`,
+                method: 'DELETE'
+            })
+        }),
     })
 });
 
@@ -76,7 +88,9 @@ export const {
     useGetQuizzesForCourseQuery, 
     useCreateLearningPathMutation,
     useUpdateLearningPathMutation,
+    useDeleteLearningPathMutation,
     useCreateCourseMutation,
-    useUpdateCourseMutation
+    useUpdateCourseMutation,
+    useDeleteCourseMutation
 } = learningPathsApiSlice;
 
