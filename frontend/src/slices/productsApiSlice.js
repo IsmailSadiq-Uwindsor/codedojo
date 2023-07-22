@@ -4,9 +4,10 @@ import { apiSlice } from "./apiSlice";
 export const learningPathsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getLearningPaths: builder.query({
-            query: ({pageNumber}) => ({
+            query: ({keyword, pageNumber}) => ({
                 url: PRODUCTS_URL,
                 params: {
+                    keyword,
                     pageNumber
                 }
             }),

@@ -8,9 +8,9 @@ import { useParams } from 'react-router-dom';
 
 const HomeScreen = () => {
 
-  const { pageNumber } = useParams();
+  const { pageNumber, keyword } = useParams();
 
-  const {data, isLoading, error }  = useGetLearningPathsQuery({pageNumber});
+  const {data, isLoading, error }  = useGetLearningPathsQuery({keyword, pageNumber});
 
   return (
     <>
@@ -28,7 +28,7 @@ const HomeScreen = () => {
                   )
               ))}
           </Row>
-          <Paginate pages={data.pages} page={data.page}/>
+          <Paginate pages={data.pages} page={data.page} keyword = {keyword ? keyword : ''}/>
         </>) } 
     </>
   )
