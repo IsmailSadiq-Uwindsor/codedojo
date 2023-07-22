@@ -9,7 +9,7 @@ import { useUpdateLearningPathMutation, useGetLearningPathDetailsQuery } from ".
 
 const LearningPathEditScreen = () => {
 
-    const { learningPathId: learningPathId } = useParams();
+    const { learningPathId } = useParams();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -58,7 +58,7 @@ const LearningPathEditScreen = () => {
 
   return (
     <>
-        <Link to='/admin/learningPathList' className="btn btn-light my-3">
+        <Link to='/admin/learningpathlist' className="btn btn-light my-3">
             Go Back
         </Link>
         <FormContainer>
@@ -92,8 +92,9 @@ const LearningPathEditScreen = () => {
                     </Form.Group>
 
                     <Form.Group controlId="isActive" className="my-2">
-                        <Form.Label>Learning Path Visibility (isActive)</Form.Label>
-                        <Form.Control type="boolean" placeholder="Enter true or false" value={isActive} onChange={(e) => setIsActive(e.target.value)}></Form.Control>
+                        {/* <Form.Label>Learning Path Visibility (isActive)</Form.Label>
+                        <Form.Control type="boolean" placeholder="Enter true or false" value={isActive} onChange={(e) => setIsActive(e.target.value)}></Form.Control> */}
+                        <Form.Check type="checkbox" label='Learning Path Visibility (isActive)' checked={isActive} onChange={(e) => setIsActive(e.target.checked)}></Form.Check>
                     </Form.Group>
 
                     <Button type="submit" variant="primary" className="my-2">

@@ -17,7 +17,10 @@ const registerUser = asyncHandler( async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        purchases: {
+            learningPathId: 0
+        }
     });
 
     if (user) {
@@ -143,6 +146,17 @@ const updateUser = asyncHandler( async (req, res) => {
         user.isAdmin = Boolean(req.body.isAdmin);
 
         const updatedUser = await user.save();
+
+
+        // const userProfile = await User.findById(req.params.userId);
+        // if(user.isAdmin) {
+        //     const adminPurchase = {learningPathId: 0}
+        //     let existingPurchases = user.purchases
+        //     existingPurchases.push(...adminPurchase)
+        //     user.purchases = existingPurchases
+        //     await user.save()
+        // }
+
         res.status(200).json({
             userId: updatedUser._id,
             name: updatedUser.name,

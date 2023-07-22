@@ -44,7 +44,7 @@ const LearningPathScreen = () => {
     let access = false;
     if(userInfo !== null){
       for (let i = 0; i < profile?.purchases?.length; i++){
-          if (profile.isAdmin === true || profile.purchases[i].learningPathId === learningPathId){
+          if (profile?.isAdmin === true || profile?.purchases[i]?.learningPathId === learningPathId){
             access = true;
           }
       }

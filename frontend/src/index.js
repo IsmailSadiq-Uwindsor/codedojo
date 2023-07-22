@@ -31,6 +31,7 @@ import CourseListScreen from './screens/adminonly/CourseListScreen';
 import LearningPathEditScreen from './screens/adminonly/LearningPathEditScreen';
 import CourseEditScreen from './screens/adminonly/CourseEditScreen';
 import UserListScreen from './screens/adminonly/UserListScreen';
+import UserEditScreen from './screens/adminonly/UserEditScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
         <Route path='/admin/learningpath/:learningPathId/edit' element={<LearningPathEditScreen/>}/>
         <Route path='/admin/learningpath/:learningPathId/course/:courseId/edit' element={<CourseEditScreen/>}/>
         <Route path='/admin/userlist' element={<UserListScreen/>}/>
+        <Route path='/admin/user/:userId/edit' element={<UserEditScreen/>}/>
       </Route>
 
     </Route>
