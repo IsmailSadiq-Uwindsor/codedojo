@@ -55,6 +55,7 @@ const router = createBrowserRouter(
       <Route path='' element={<AdminRoute/>}>
         <Route path='/admin/orderlist' element={<OrderListScreen/>}/>
         <Route path='/admin/learningpathlist' element={<LearningPathListScreen/>}/>
+        <Route path='/admin/learningpathlist/:pageNumber' element={<LearningPathListScreen/>}/>
         <Route path='/admin/learningpath/:learningPathId/courselist' element={<CourseListScreen/>}/>
         <Route path='/admin/learningpath/:learningPathId/edit' element={<LearningPathEditScreen/>}/>
         <Route path='/admin/learningpath/:learningPathId/course/:courseId/edit' element={<CourseEditScreen/>}/>

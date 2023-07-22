@@ -3,6 +3,7 @@ import { useGetLearningPathsQuery } from '../slices/productsApiSlice';
 import LearningPath from '../components/LearningPath';
 import Loader from "../components/Loader";
 import Message from '../components/Message';
+import Paginate from '../components/Paginate';
 import { useParams } from 'react-router-dom'; 
 
 const HomeScreen = () => {
@@ -27,6 +28,7 @@ const HomeScreen = () => {
                   )
               ))}
           </Row>
+          <Paginate pages={data.pages} page={data.page}/>
         </>) } 
     </>
   )

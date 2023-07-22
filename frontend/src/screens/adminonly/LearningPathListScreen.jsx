@@ -5,12 +5,15 @@ import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
+import Paginate from '../../components/Paginate';
 import { useGetLearningPathsQuery, useCreateLearningPathMutation, useDeleteLearningPathMutation } from '../../slices/productsApiSlice';
 
 
 const LearningPathListScreen = () => {
 
-    const { data: learningPaths, isLoading, error, refetch } = useGetLearningPathsQuery();
+    const { pageNumber } = useParams();
+
+    const { data, isLoading, error, refetch } = useGetLearningPathsQuery({ pageNumber });
 
     const [ createLearningPath, { isLoading: loadingCreate }] = useCreateLearningPathMutation();
 
@@ -71,7 +74,7 @@ const LearningPathListScreen = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        { learningPaths.map((learningPath) => (
+                        { data.learningPaths.map((learningPath) => (
                                 <tr key={learningPath._id}>
                                     <td>
                                         <Link to={`/admin/learningpath/${learningPath._id}/courselist`}>
@@ -93,6 +96,7 @@ const LearningPathListScreen = () => {
                         )}
                     </tbody>
                 </Table>
+                    <Paginate pages={data.pages} page={data.page} isAdmin={true}/>
             </>
         )
         }
