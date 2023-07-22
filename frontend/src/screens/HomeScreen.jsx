@@ -14,6 +14,8 @@ const HomeScreen = () => {
 
   const error = learningPathsData.isError
 
+  console.log(learningPaths)
+
   return (
     <>
         { isLoading ? (
@@ -22,11 +24,12 @@ const HomeScreen = () => {
           <h1>Learning Paths</h1>
           <Row>
               {learningPaths.map( (learningPath) => (
-                  // {learningPath.isActive && 
+                  learningPath.isActive && 
+                  ( 
                     <Col key={learningPath._id} sm={12} md={6} lg={4} xl={3}>
                         <LearningPath learningPath={learningPath}/>
                     </Col>
-                  // }
+                  )
               ))}
           </Row>
         </>) } 
