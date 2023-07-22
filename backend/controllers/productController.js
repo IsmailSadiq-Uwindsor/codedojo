@@ -175,7 +175,7 @@ const createLearningPathReview = asyncHandler( async (req, res) => {
        const alreadyReviewed = learningPath.reviews.find( (review) => review.userId.toString() === req.user._id.toString() );
        if(alreadyReviewed) {
         res.status(400);
-        throw new Error('LearningPath already reviewed');
+        throw new Error('You can only review a Learning Path once');
        }
 
        const review = {
@@ -187,7 +187,7 @@ const createLearningPathReview = asyncHandler( async (req, res) => {
 
        learningPath.reviews.push(review);
 
-       learningPath.numReviews = products.reviews.length;
+       learningPath.numReviews = learningPath.reviews.length;
 
        learningPath.rating = learningPath.reviews.reduce((acc, review) => acc + review.rating, 0) / learningPath.reviews.length;
 

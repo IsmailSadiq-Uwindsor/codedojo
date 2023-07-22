@@ -77,6 +77,14 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
                 method: 'DELETE'
             })
         }),
+        createReview: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/${data.learningPathId}/reviews`,
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['LearningPath']
+        })
     })
 });
 
@@ -91,6 +99,7 @@ export const {
     useDeleteLearningPathMutation,
     useCreateCourseMutation,
     useUpdateCourseMutation,
-    useDeleteCourseMutation
+    useDeleteCourseMutation,
+    useCreateReviewMutation
 } = learningPathsApiSlice;
 

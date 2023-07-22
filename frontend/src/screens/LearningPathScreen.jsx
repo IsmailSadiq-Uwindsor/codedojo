@@ -1,14 +1,15 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery } from '../slices/productsApiSlice';
+import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery, useCreateReviewMutation } from '../slices/productsApiSlice';
 import { useGetUserProfileQuery } from '../slices/usersApiSlice';
 import Course from '../components/Course'
 import Rating from '../components/Rating';
 import Loader from "../components/Loader";
 import Message from '../components/Message'; 
 import { addToCart } from '../slices/cartSlice';
-import { FaInfoCircle } from "react-icons/fa"
+import { FaInfoCircle } from "react-icons/fa";
+import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 
 const LearningPathScreen = () => {
@@ -20,9 +21,14 @@ const LearningPathScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { data : learningPath, isLoading : learningPathIsLoading, isError : learningPathError } = useGetLearningPathDetailsQuery(learningPathId);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
+
+    const { data : learningPath, isLoading : learningPathIsLoading, isError : learningPathError, refetch } = useGetLearningPathDetailsQuery(learningPathId);
 
     const { data : courses, isLoading : coursesIsLoading, isError : coursesError } = useGetCoursesForLearningPathQuery(learningPathId);
+
+    const [createReview, { isLoading: loadingLearningPathReview }] = useCreateReviewMutation();
 
     const addToCartHandler = () => {
       dispatch(addToCart({ ...learningPath}));
@@ -55,6 +61,23 @@ const LearningPathScreen = () => {
       // }
     }
 
+    const submitHandler = async (e) =>{
+      e.preventDefault();
+      try {
+        await createReview({
+          learningPathId,
+          rating,
+          comment
+        }).unwrap();
+        refetch();
+        toast.success('Review Submitted');
+        setRating(0);
+        setComment('')
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+
   return (
     <>
         <Link className='btn btn-light my-3' to="/learningpaths">Go Back</Link>
@@ -64,12 +87,11 @@ const LearningPathScreen = () => {
         ) : learningPathError ? (<Message variant='danger'>{learningPathError?.data?.message || learningPathError.error}</Message>) : ( <>
           { access  
           ? 
-            <Button style = {{display: 'none'}} className='btn-block' type='button' disabled={learningPath.isActive === false || button === true} onClick={addToCartHandler}> Add To Cart </Button>
+            <Button style = {{display: 'none'}}> Add To Cart </Button>
           :
             
             <Button style = {{marginLeft: 20}} className='btn-block' type='button' disabled={learningPath.isActive === false || button === true} onClick={addToCartHandler}> Add To Cart </Button>
           }
-
           <Row>
             <Col md={5}>
                 <ListGroup variant='flush'>
@@ -105,6 +127,50 @@ const LearningPathScreen = () => {
                         ))}
                     </Row>
                 </>)}
+            </Col>
+            <Col md={5} className='review'>
+            
+              <h2>Reviews</h2>
+              {learningPath.reviews.length === 0 && <Message>No Reviews</Message>}
+            
+             <ListGroup variant='flush'>
+                  {learningPath.reviews.map(review => (
+                    <ListGroup.Item key={review._id}>
+                      <strong>{review.name}</strong>
+                      <Rating value={review.rating}/>
+                      <p>{review.createdAt.substring(0, 10)}</p>
+                      <p>{review.comment}</p>
+                    </ListGroup.Item>
+                  ))}
+                  <ListGroup.Item>
+                    <h2>Write a Customer Review</h2>
+                    {loadingLearningPathReview && <Loader/>}
+                    { userInfo ? (
+                      <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='rating' className='my-2'>
+                          <Form.Label>Rating</Form.Label>
+                          <Form.Control as='select' value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                            <option value=''>Select...</option>
+                            <option value='1'>1 - Poor</option>
+                            <option value='2'>2 - Fair</option>
+                            <option value='3'>3 - Good</option>
+                            <option value='4'>4 - Very Good</option>
+                            <option value='5'>5 - Excellent</option>
+                          </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='comment' className='my-2'>
+                          <Form.Label>Comment</Form.Label>
+                          <Form.Control as='textarea' row='3' value={comment} onChange={(e) => setComment(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Button disabled={loadingLearningPathReview} type='submit' variant='primary'>
+                          Submit
+                        </Button>
+                      </Form>
+                    ) : (
+                      <Message> Please <Link to='/login'>login</Link> to write a review</Message>
+                    )}
+                  </ListGroup.Item>
+             </ListGroup>
             </Col>
           </Row>
         </>)}    
