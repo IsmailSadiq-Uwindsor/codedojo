@@ -46,7 +46,7 @@ const ProfileScreen = () => {
         }
      }
 
-     console.log(orders)
+    //  console.log(orders)
 
   return (
     <Row>
@@ -75,6 +75,7 @@ const ProfileScreen = () => {
             </Form>
         </Col>
 
+        { !userInfo?.isAdmin && (
         <Col md={9}>
             <h2>My Orders</h2>
             { 
@@ -130,6 +131,7 @@ const ProfileScreen = () => {
                 )
             }
         </Col>
+        )}
 
     </Row>
   )

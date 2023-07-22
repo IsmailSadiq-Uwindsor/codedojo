@@ -9,6 +9,8 @@ import { logout } from '../slices/loginSlice'
 
 const Header = () => {
 
+    // const { data: profile } = useGetUserProfileQuery();
+
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -40,6 +42,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls='basic-navbar-nav'/>
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='ms-auto'>
+                        { !userInfo?.isAdmin && (
                         <LinkContainer to='/cart'>
                             <Nav.Link>
                                 <FaShoppingCart/> Cart 
@@ -52,6 +55,22 @@ const Header = () => {
                                 } 
                             </Nav.Link>
                         </LinkContainer>
+                        )}
+                        
+                        { userInfo && userInfo.isAdmin && (
+                            <NavDropdown title='Admin' id='adminmenu'>
+                                <LinkContainer to='/admin/learningpathlist'>
+                                    <NavDropdown.Item>LearningPaths</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to='/admin/userlist'>
+                                    <NavDropdown.Item>Users</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to='/admin/orderlist'>
+                                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                                </LinkContainer>
+                            </NavDropdown>
+                        )}
+
                         { userInfo ? (
                             <NavDropdown title={userInfo.name} id='username'>
                                 <LinkContainer to='/profile'>
@@ -66,19 +85,7 @@ const Header = () => {
                                 <Nav.Link href='/login'><FaUser/> Sign In</Nav.Link>
                             </LinkContainer>
                         )}
-                        { userInfo && userInfo.isAdmin && (
-                            <NavDropdown title='Admin' id='adminmenu'>
-                                <LinkContainer to='/admin/learningpathlist'>
-                                    <NavDropdown.Item>LearningPaths</NavDropdown.Item>
-                                </LinkContainer>
-                                <LinkContainer to='/admin/userlist'>
-                                    <NavDropdown.Item>Users</NavDropdown.Item>
-                                </LinkContainer>
-                                <LinkContainer to='/admin/orderlist'>
-                                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                                </LinkContainer>
-                            </NavDropdown>
-                        )}
+                        
                     </Nav>
                 </Navbar.Collapse>
             </Container>

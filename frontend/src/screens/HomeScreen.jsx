@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
   const error = learningPathsData.isError
 
-  console.log(learningPaths)
+  // console.log(learningPaths)
 
   return (
     <>
