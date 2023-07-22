@@ -13,7 +13,7 @@ const CourseEditScreen = () => {
 
     const [title, setTitle] = useState('');
     const [abstract, setAbstract] = useState('');
-    const [video, setVideo] = useState('');
+    const [url, setUrl] = useState('');
     
     const { data: course, isLoading, refetch, error } = useGetCourseDetailsQuery({learningPathId, courseId});
 
@@ -25,7 +25,7 @@ const CourseEditScreen = () => {
         if(course){
             setTitle(course.title);
             setAbstract(course.abstract);
-            setVideo(course.video);
+            setUrl(course.url);
         }
     }, [course])
 
@@ -36,7 +36,7 @@ const CourseEditScreen = () => {
             learningPathId,
             title,
             abstract,
-            video
+            url
         };
         const result = await updateCourse(updatedCourse);
         if (result.error) {
@@ -56,7 +56,7 @@ const CourseEditScreen = () => {
         <FormContainer>
             <h1>Edit Course</h1>
             {loadingUpdate && <Loader/>}
-            {isLoading ? <Loader/> : error ? <Message vaeriant='danger'>{error}</Message> : (
+            {isLoading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId="title" className="my-2">
                         <Form.Label>Course Title</Form.Label>
@@ -66,6 +66,11 @@ const CourseEditScreen = () => {
                     <Form.Group controlId="abstract" className="my-2">
                         <Form.Label>Abstract</Form.Label>
                         <Form.Control as="textarea" placeholder="Enter Course Abstract" value={abstract} onChange={(e) => setAbstract(e.target.value)}></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="url" className="my-2">
+                        <Form.Label>Video Url</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Video Url" value={url} onChange={(e) => setUrl(e.target.value)}></Form.Control>
                     </Form.Group>
 
                     {/* Video Input Placeholder */}

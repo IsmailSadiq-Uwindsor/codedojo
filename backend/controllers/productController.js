@@ -112,7 +112,8 @@ const createCourse = asyncHandler( async (req, res) => {
         userId: req.user._id,
         learningPathId: req.params.learningPathId,
         title: 'Sample title',
-        abstract: 'Sample abstract'
+        abstract: 'Sample abstract',
+        url: 'www.sample.com'
     })
     const createdCourse = await course.save();
     res.status(201).json(createdCourse);
@@ -122,14 +123,14 @@ const createCourse = asyncHandler( async (req, res) => {
 //@route        PUT /api/learningpaths/:learningPathId/courses/:courseId
 //@access       Private/Admin
 const updateCourse = asyncHandler( async (req, res) => {
-    const { title, abstract, video } = req.body;
+    const { title, abstract, url } = req.body;
 
     const course = await Course.findOne({learningPathId: req.params.learningPathId, _id: req.params.courseId});
 
     if (course) {
         course.title = title;
         course.abstract = abstract;
-        course.video = video;
+        course.url = url;
 
         const updatedCourse = await course.save();
         res.status(200).json(updatedCourse);
