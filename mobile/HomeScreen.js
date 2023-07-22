@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text,StyleSheet,FlatList,TouchableOpacity } from 'react-native';
 import { useNavigation} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -58,26 +59,28 @@ import { useNavigation} from '@react-navigation/native';
       );
     
       return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+        <View >
           <FlatList
             data={courses}
             renderItem={renderCourseItem}
             keyExtractor={(item) => item.id.toString()}
           />
         </View>
+        </SafeAreaView>
       );
     };
 
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          padding: 20,
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
         },
         courseItem: {
-          padding: 10,
-          marginBottom: 10,
+          padding:'5%',
           backgroundColor: '#f0f0f0',
           borderRadius: 8,
+          margin:'3%'
         },
         Name: {
             fontSize: 18,

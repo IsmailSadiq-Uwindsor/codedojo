@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 import QuizScreen from './QuizScreen';
 import SearchScreen from './SearchScreen';
-const Stack = createStackNavigator();
+
+
 //Screen names
 const homeName = "Learning Path";
 const searchname = "Search";
@@ -21,6 +19,7 @@ const Tab = createBottomTabNavigator();
 
 function MainContainer() {
   return (
+    
       <Tab.Navigator independent ={true}
         initialRouteName={homeName}
         screenOptions={({ route }) => ({
@@ -49,8 +48,8 @@ function MainContainer() {
         tabBarOptions={{
           activeTintColor: 'black',
           inactiveTintColor: 'grey',
-          labelStyle: { paddingBottom: 10, fontSize: 10, },
-          style: { padding: 15, height: 70}
+          labelStyle: {fontSize: 10},
+          style: {padding: 15, height: 50}
         }}>
 
         <Tab.Screen name={homeName} component={HomeScreen} />
@@ -58,6 +57,7 @@ function MainContainer() {
         <Tab.Screen name={quizname} component={QuizScreen} />
         <Tab.Screen name={profilename} component={ProfileScreen} />
       </Tab.Navigator>
+      
     
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
@@ -56,7 +57,8 @@ navigation.navigate('LoginScreen');
     navigation.navigate('PurchaseScreen');
       };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <View >
       <TouchableOpacity onPress={handleSelectImage}>
         {profileImage ? (
           <Image source={profileImage} style={styles.profileImage} />
@@ -69,12 +71,13 @@ navigation.navigate('LoginScreen');
       <Text style={styles.name}>{user.name}</Text>
       <Text style={styles.email}>{user.email}</Text>
       <TouchableOpacity style={styles.logoutButton} onPress={handlePurchase}>
-        <Text style={styles.logoutButtonText}>purchased Course</Text>
+        <Text style={styles.logoutButtonText}>Purchased Course</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>Logout</Text>
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginTop:'10%'
   },
   profileImagePlaceholderText: {
     fontSize: 18,
@@ -124,14 +127,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logoutButton: {
-    backgroundColor: '#dc3545',
+    backgroundColor: 'black',
     padding: 12,
     borderRadius: 8,
+    marginTop:'3%',
+    
   },
   logoutButtonText: {
     fontSize: 18,
     color: 'white',
     fontWeight: 'bold',
+    justifyContent:'center'
   },
 });
 

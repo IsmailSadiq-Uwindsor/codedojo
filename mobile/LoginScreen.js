@@ -1,11 +1,7 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image, Text,Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {
-  responsiveScreenWidth,
-  responsiveScreenHeight,
-  responsiveFontSize,
-} from 'react-native-responsive-screen';
+
 
 import { useNavigation} from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -41,11 +37,11 @@ const LoginScreen = () => {
       <Text style={styles.text2}>Enter your login credential here..</Text>
         <View style={styles.direction}>
         <Icon name="user" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="Username" />
+        <TextInput style={styles.input} placeholder="Enter your email address" placeholderTextColor={'grey'} />
         </View>
         <View style={styles.direction}>
         <Icon name="lock" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+        <TextInput style={styles.input} placeholder="Password" placeholderTextColor={'grey'}secureTextEntry />
         </View>
         <Pressable style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText} >Login</Text>

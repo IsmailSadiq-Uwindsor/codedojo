@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const quizzes = [
   {
@@ -56,26 +57,28 @@ const QuizScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <View>
       <FlatList
         data={quizzes}
         renderItem={renderQuizItem}
         keyExtractor={(item) => item.id}
       />
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
   },
   quizItem: {
-    padding: 10,
-    marginBottom: 10,
+    padding:'5%',
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
+    margin:'1%'
   },
   quizTitle: {
     fontSize: 18,
