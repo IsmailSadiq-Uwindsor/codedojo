@@ -3,19 +3,35 @@ import { Table, Button } from 'react-bootstrap';
 import { FaTimes, FaTrash, FaEdit, FaCheck } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
-import { useGetUsersQuery } from '../../slices/usersApiSlice';
+import { useGetUsersQuery, useDeleteUserMutation } from '../../slices/usersApiSlice';
+import { toast } from 'react-toastify';
 
 const UserListScreen = () => {
 
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
 
-  const deleteHandler = (userId) => {
-    console.log('delete', userId);
+  const [deleteUser, { isLoading: loadingDelete, isError }] = useDeleteUserMutation();
+
+  const deleteHandler = async (userId) => {
+    if (window.confirm('Are you sure?')) {
+        try {
+            await deleteUser(userId);
+            if(isError) {
+                toast.error('Cannot delete admin user');
+            } else {
+                toast.success('User deleted');
+            }
+            refetch();
+        } catch (err) {
+            toast.error(err?.data?.message || err.error);
+        }
+    }
   }
 
   return (
     <>
     <h1>Users</h1>
+    {loadingDelete && <Loader/>}
     { 
       isLoading 
       ?
