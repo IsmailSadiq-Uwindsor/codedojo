@@ -30,11 +30,11 @@ const courseSchema = new mongoose.Schema({
     credits: {
         type: Number,
         required: false
-    },
-    category: {
-        type: String,
-        required: false
     }
+    // category: {
+    //     type: String,
+    //     required: false
+    // }
 }, {
     timestamps: true
 });

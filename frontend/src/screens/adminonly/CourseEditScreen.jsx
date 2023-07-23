@@ -5,7 +5,7 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
 import { toast } from 'react-toastify';
-import { useUpdateCourseMutation, useGetCourseDetailsQuery } from "../../slices/productsApiSlice";
+import { useUpdateCourseMutation, useGetCourseDetailsQuery, useUploadCourseVideoMutation } from "../../slices/productsApiSlice";
 
 const CourseEditScreen = () => {
 
@@ -14,10 +14,13 @@ const CourseEditScreen = () => {
     const [title, setTitle] = useState('');
     const [abstract, setAbstract] = useState('');
     const [url, setUrl] = useState('');
+    const [video, setVideo] = useState('');
     
     const { data: course, isLoading, refetch, error } = useGetCourseDetailsQuery({learningPathId, courseId});
 
     const [updateCourse, { isLoading: loadingUpdate }] = useUpdateCourseMutation();
+
+    const [uploadCourseVideo, { isLoading: loadingUpload }] = useUploadCourseVideoMutation();
 
     const navigate = useNavigate();
 
@@ -26,6 +29,7 @@ const CourseEditScreen = () => {
             setTitle(course.title);
             setAbstract(course.abstract);
             setUrl(course.url);
+            setVideo(course.video);
         }
     }, [course])
 
@@ -36,7 +40,8 @@ const CourseEditScreen = () => {
             learningPathId,
             title,
             abstract,
-            url
+            url,
+            video
         };
         const result = await updateCourse(updatedCourse);
         if (result.error) {
@@ -45,6 +50,19 @@ const CourseEditScreen = () => {
             refetch();
             toast.success('Course Updated');
             navigate(`/admin/learningpath/${learningPathId}/courselist`)
+        }
+    };
+
+    const uploadFileHandler = async (e) => {
+        // console.log(e.target.files[0]);
+        const formData = new FormData();
+        formData.append('video', e.target.files[0]);
+        try {
+            const res = await uploadCourseVideo(formData).unwrap();
+            toast.success(res.message);
+            setVideo(res.video);
+        } catch (err) {
+            toast.error(err?.data?.message || err.error);
         }
     }
 
@@ -69,8 +87,14 @@ const CourseEditScreen = () => {
                     </Form.Group>
 
                     <Form.Group controlId="url" className="my-2">
-                        <Form.Label>Video Url</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Video Url" value={url} onChange={(e) => setUrl(e.target.value)}></Form.Control>
+                        <Form.Label>Url</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Url" value={url} onChange={(e) => setUrl(e.target.value)}></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="video" className="my-2">
+                        <Form.Label>Video</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Video Url" value={video} onChange={(e) => setVideo(e.target.value)}></Form.Control>
+                        <Form.Control type='file' label='Choose file' onChange={ uploadFileHandler}></Form.Control>
                     </Form.Group>
 
                     {/* Video Input Placeholder */}

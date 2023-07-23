@@ -1,4 +1,4 @@
-import { PRODUCTS_URL } from "../constants";
+import { PRODUCTS_URL, UPLOADS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const learningPathsApiSlice = apiSlice.injectEndpoints({
@@ -75,6 +75,13 @@ export const learningPathsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Courses']
         }),
+        uploadCourseVideo: builder.mutation({
+            query: (data) => ({
+                url: UPLOADS_URL,
+                method: 'POST',
+                body: data    
+            })
+        }),
         deleteCourse: builder.mutation({
             query: ({learningPathId, courseId}) => ({
                 url: `${PRODUCTS_URL}/${learningPathId}/courses/${courseId}`,
@@ -103,6 +110,7 @@ export const {
     useDeleteLearningPathMutation,
     useCreateCourseMutation,
     useUpdateCourseMutation,
+    useUploadCourseVideoMutation,
     useDeleteCourseMutation,
     useCreateReviewMutation
 } = learningPathsApiSlice;
