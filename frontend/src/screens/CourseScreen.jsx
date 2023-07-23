@@ -6,6 +6,7 @@ import { useGetCourseDetailsQuery, useGetQuizzesForCourseQuery } from '../slices
 import Quiz from '../components/Quiz'
 import Loader from "../components/Loader";
 import Message from '../components/Message'; 
+import { Player } from 'video-react'
 
 const CourseScreen = () => {
 
@@ -38,6 +39,12 @@ const CourseScreen = () => {
         ) : courseError ? (<Message variant='danger'>{courseError?.data?.message || courseError.error}</Message>) : ( <>
           <Row>
               <Col>
+                  {/* <Player>
+                    <source src='https://youtu.be/m-Pg80e6Ogk' />
+                  </Player> */}
+                  <video controls width="100%" height="400">
+                    <source type="video/mp4" src={course.video} />
+                  </video>
                   <ListGroup variant='flush'>
                       <ListGroup.Item></ListGroup.Item>
 

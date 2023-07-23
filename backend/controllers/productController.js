@@ -134,7 +134,8 @@ const createCourse = asyncHandler( async (req, res) => {
         learningPathId: req.params.learningPathId,
         title: 'Sample title',
         abstract: 'Sample abstract',
-        url: 'www.sample.com'
+        url: 'www.sample.com',
+        video: '/images/test.mp4'
     })
     const createdCourse = await course.save();
     res.status(201).json(createdCourse);

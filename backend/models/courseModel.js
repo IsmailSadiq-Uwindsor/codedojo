@@ -27,14 +27,6 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    tags: {
-        type: Array,
-        required: false
-    },
-    courseSlug: {
-        type: String,
-        required: false
-    },
     credits: {
         type: Number,
         required: false
