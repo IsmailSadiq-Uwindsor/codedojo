@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/loginSlice'
-import SearchBox from './SearchBox';
+// import SearchBox from './SearchBox';
 // import logo from '../assets/logo.png'
 
 const Header = () => {

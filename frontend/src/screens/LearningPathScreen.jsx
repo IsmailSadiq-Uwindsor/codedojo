@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import { Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 import { useGetLearningPathDetailsQuery, useGetCoursesForLearningPathQuery, useCreateReviewMutation } from '../slices/productsApiSlice';
 import { useGetUserProfileQuery } from '../slices/usersApiSlice';
 import Course from '../components/Course'
@@ -10,7 +10,7 @@ import Message from '../components/Message';
 import { addToCart } from '../slices/cartSlice';
 import { FaInfoCircle } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const LearningPathScreen = () => {
 

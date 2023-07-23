@@ -1,7 +1,7 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
-import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
@@ -10,7 +10,7 @@ import { useGetCoursesForLearningPathQuery, useCreateCourseMutation, useDeleteCo
 
 const CourseListScreen = () => {
 
-    const { learningPathId: learningPathId } = useParams();
+    const { learningPathId } = useParams();
 
     const { data: courses, isLoading, error, refetch } = useGetCoursesForLearningPathQuery(learningPathId);
 

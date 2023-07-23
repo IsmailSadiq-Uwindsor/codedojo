@@ -1,32 +1,31 @@
-import {useEffect, useState} from 'react'
-// import axios from 'axios';
+import { useState} from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
+import { Row, Col, ListGroup, Button} from 'react-bootstrap';
 import { useGetCourseDetailsQuery, useGetQuizzesForCourseQuery } from '../slices/productsApiSlice';
 import Quiz from '../components/Quiz'
 import Loader from "../components/Loader";
 import Message from '../components/Message'; 
-import { Player } from 'video-react'
+// import { Player } from 'video-react'
 
 const CourseScreen = () => {
 
-    const { learningPathId: learningPathId, courseId: courseId } = useParams ();
+    const { learningPathId, courseId } = useParams ();
 
-    const courseData = useGetCourseDetailsQuery({learningPathId, courseId});
+    const {data: course, isLoading: courseIsLoading, isError: courseError  } = useGetCourseDetailsQuery({learningPathId, courseId});
 
-    const course = courseData.data
+    // const course = courseData.data
   
-    const courseIsLoading = courseData.isLoading
+    // const courseIsLoading = courseData.isLoading
   
-    const courseError = courseData.isError  
+    // const courseError = courseData.isError  
 
-    const quizzesData = useGetQuizzesForCourseQuery({learningPathId, courseId});
+    const { data: quizzes, isLoading: quizzesIsLoading, isError: quizzesError } = useGetQuizzesForCourseQuery({learningPathId, courseId});
   
-    const quizzes = quizzesData.data
+    // const quizzes = quizzesData.data
     
-    const quizzesIsLoading = quizzesData.isLoading
+    // const quizzesIsLoading = quizzesData.isLoading
     
-    const quizzesError = quizzesData.isError  
+    // const quizzesError = quizzesData.isError  
 
     const [test, setTest] = useState({})
 

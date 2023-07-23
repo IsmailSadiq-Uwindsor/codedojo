@@ -9,7 +9,7 @@ import { useUpdateCourseMutation, useGetCourseDetailsQuery, useUploadCourseVideo
 
 const CourseEditScreen = () => {
 
-    const { learningPathId: learningPathId, courseId: courseId } = useParams();
+    const { learningPathId, courseId } = useParams();
 
     const [title, setTitle] = useState('');
     const [abstract, setAbstract] = useState('');
@@ -20,7 +20,7 @@ const CourseEditScreen = () => {
 
     const [updateCourse, { isLoading: loadingUpdate }] = useUpdateCourseMutation();
 
-    const [uploadCourseVideo, { isLoading: loadingUpload }] = useUploadCourseVideoMutation();
+    const [uploadCourseVideo] = useUploadCourseVideoMutation();
 
     const navigate = useNavigate();
 
