@@ -5,6 +5,8 @@ import Loader from "../components/Loader";
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import { useParams } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+import SearchBox from '../components/SearchBox';
 
 const HomeScreen = () => {
 
@@ -14,6 +16,10 @@ const HomeScreen = () => {
 
   return (
     <>
+        <Row>
+          <SearchBox/>
+        </Row>
+        { keyword && <Link to='/learningpaths' className='btn btn-light mt-4 mb-4'>Go Back</Link>}
         { isLoading ? (
           <Loader/>
         ) : error ? (<Message variant='danger'>{ error?.data?.message || error.error }</Message>) : (<>
