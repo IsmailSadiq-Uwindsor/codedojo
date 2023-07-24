@@ -15,12 +15,6 @@ const LoginScreen = () => {
     // Redirect to HomeScreen
     navigation.navigate('MainContainer');
   };
-  const handleForgorpassword = () => {
-    // Perform login logic here
-  
-    // Redirect to Forgotscreen
-    navigation.navigate('Forgotpassword');
-  };
   const handleSignup = () => {
     // Perform login logic here
   
@@ -45,10 +39,7 @@ const LoginScreen = () => {
         </View>
         <Pressable style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText} >Login</Text>
-        </Pressable>
-        <Pressable onPress={handleForgorpassword}>
-        <Text style={styles.text3}>Forgot you Password ?</Text>
-        </Pressable>
+          </Pressable>
         <Text style={styles.text4}>Don't have account yet ?</Text>
         <Text style={styles.text5}>Create an account here!</Text>
         <Pressable style={styles.signup} onPress={handleSignup}>

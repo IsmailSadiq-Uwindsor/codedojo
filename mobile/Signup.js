@@ -21,19 +21,19 @@ const navigation = useNavigation();
       
         <View style={styles.direction}>
         <Icon name="user" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="Full Name" secureTextEntry />
+        <TextInput style={styles.input} placeholder="Full Name" placeholderTextColor={'grey'}  secureTextEntry />
         </View>
         <View style={styles.direction}>
         <Icon name="envelope" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="email id" secureTextEntry />
+        <TextInput style={styles.input} placeholder="email id" placeholderTextColor={'grey'}  secureTextEntry />
         </View>
         <View style={styles.direction}>
         <Icon name="lock" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+        <TextInput style={styles.input} placeholder="Password"  placeholderTextColor={'grey'} secureTextEntry />
         </View>
         <View style={styles.direction}>
         <Icon name="lock" style={styles.icon} />
-        <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry />
+        <TextInput style={styles.input} placeholder="Confirm Password" placeholderTextColor={'grey'} secureTextEntry />
         </View>
         <Pressable style={styles.signupbutton} onPress={handlesignup}>
           <Text style={styles.loginButtonText} >Sign Up</Text>

@@ -5,7 +5,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // Screens
 import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
-import QuizScreen from './QuizScreen';
 import SearchScreen from './SearchScreen';
 
 
@@ -33,9 +32,7 @@ function MainContainer() {
             } else if (rn === searchname) {
               iconName = focused ? 'search' : 'search-outline';
 
-            } else if (rn === quizname) {
-              iconName = focused ? 'list' : 'list-outline';
-            }
+            } 
             else if (rn === profilename) {
                 iconName = focused ? 'person' : 'person-outline';
               }
@@ -54,7 +51,6 @@ function MainContainer() {
 
         <Tab.Screen name={homeName} component={HomeScreen} />
         <Tab.Screen name={searchname} component={SearchScreen} />
-        <Tab.Screen name={quizname} component={QuizScreen} />
         <Tab.Screen name={profilename} component={ProfileScreen} />
       </Tab.Navigator>
       
