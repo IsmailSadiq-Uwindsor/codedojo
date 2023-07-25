@@ -16,6 +16,17 @@ const HomeScreen = ({navigation}) => {
       };
       fetchLearningPaths();
     },[]);
+
+    const renderCourseItem = ({ item }) => (
+      <TouchableOpacity
+        style={styles.courseItem}
+        onPress={() => navigation.navigate('LearningpathDetails', item)} >
+        <Text style={styles.Name}>{item.name}</Text>
+        <Text style={styles.description}>{item.description}</Text>
+        <Text style={styles.rating}>Rating:{item.rating}</Text>
+        <Text style={styles.price}>{item.price}</Text>
+      </TouchableOpacity>
+    );
     // console.log(learningPaths)
 
     // React.useEffect(() => {
@@ -36,24 +47,33 @@ const HomeScreen = ({navigation}) => {
   // }
 
   return (
-  <>
+    <>
     {/* <NavigationEvents onWillFocus={fetchLearningpaths}/> */}
-    <SafeAreaView style={styles.AndroidSafeArea}>  
-      <Text style={{fontSize: 48}}>HomeScreen</Text>
-      <FlatList 
-        data={learningPaths} 
-        keyExtractor={item => item._id} 
-        renderItem={({item}) => { 
-          return (
-          <TouchableOpacity>
-            <ListItem chevron title={item.name}/>
-          </TouchableOpacity>
-          )
-        }}>
-      </FlatList>
-    </SafeAreaView>
-  </>
-  )
+    {/* // <SafeAreaView style={styles.AndroidSafeArea}>  
+    //   <Text style={{fontSize: 48}}>HomeScreen</Text>
+    //   <FlatList 
+    //     data={learningPaths} 
+    //     keyExtractor={item => item._id} 
+    //     renderItem={({item}) => { 
+    //       return (
+    //       <TouchableOpacity>
+    //         <ListItem chevron title={item.name}/>
+    //       </TouchableOpacity>
+    //       )
+    //     }}>
+    //   </FlatList>
+    // </SafeAreaView> */}
+      <SafeAreaView style={styles.container}>
+      <View >
+        <FlatList
+          data={learningPaths}
+          renderItem={renderCourseItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
+      </SafeAreaView>
+    </>
+    )
 }
 
 HomeScreen.navigationOptions = () => {
@@ -63,10 +83,31 @@ HomeScreen.navigationOptions = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  },
   AndroidSafeArea: {
     flex: 1,
     backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  },
+  Name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  description: {
+    fontSize: 16,
+    color: '#444',
+  },
+  rating: {
+    fontSize: 14,
+    color: '#888',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'green',
   }
 });
 
