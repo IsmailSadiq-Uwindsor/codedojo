@@ -24,13 +24,15 @@ const registerUser = asyncHandler( async (req, res) => {
     });
 
     if (user) {
+        const token = req.cookies.jwt
         generateToken(res, user._id);
         res.status(201).json({
             userId: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            purchases: user.purchases
+            purchases: user.purchases,
+            token: token
         });
     } else {
         res.status(400);
@@ -45,13 +47,15 @@ const loginUser = asyncHandler( async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user && (await user.matchPassword(password))) {
+        const token = req.cookies.jwt
         generateToken(res, user._id);
         res.status(200).json({
             userId: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            purchases: user.purchases
+            purchases: user.purchases,
+            token: token
         });
     } else {
         res.status(401);
@@ -76,12 +80,14 @@ const logoutUser = asyncHandler( async (req, res) => {
 const getUserProfile = asyncHandler( async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
+        const token = req.cookies.jwt
         res.status(200).json({
             userId: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            purchases: user.purchases
+            purchases: user.purchases,
+            token: token
         });
     } else {
         res.status(404);

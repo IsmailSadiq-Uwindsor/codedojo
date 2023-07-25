@@ -12,6 +12,7 @@ const generateToken = (res, userId) => {
         sameSite: 'strict',
         maxAge: 3 * 24 * 60 * 60 * 1000 //3 days in milliseconds
     });
+
 }
 
 export default generateToken;
