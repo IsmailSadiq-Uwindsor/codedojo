@@ -58,7 +58,7 @@ const CourseScreen = () => {
                       <ListGroup.Item></ListGroup.Item>        
                   </ListGroup>
 
-                  {quizzesIsLoading ? (
+                  {/* {quizzesIsLoading ? (
                   <h4>Loading Quizzes...</h4>
                   ) : quizzesError ? (<Message variant='danger'>{quizzesError?.data?.message || quizzesError.error}</Message>) : ( <>
                     <h4>Quizzes: </h4>
@@ -74,7 +74,7 @@ const CourseScreen = () => {
                                             Submit
                         </Button>
                     </div>
-                  </>)}
+                  </>)} */}
               </Col>
           </Row>
         </>)}
